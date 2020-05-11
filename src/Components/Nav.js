@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useInput } from "../CustomHooks";
 import styled from "styled-components";
 
 const Nav = () => {
   const menuItems = ["홈", "핫리스트", "보관함"];
   const [isScrolled, setIsScrolled] = useState();
+  const input = useInput("");
 
   const checkScroll = (e) => {
     if (e.target.scrollingElement.scrollTop > 1) {
@@ -13,9 +15,16 @@ const Nav = () => {
     }
   };
 
+  const submit = (e) => {
+    e.preventDefault();
+    input.setValue("");
+  };
+
   useEffect(() => {
     document.addEventListener("scroll", checkScroll);
-    return () => document.removeEventListener("scroll", checkScroll);
+    return () => {
+      document.removeEventListener("scroll", checkScroll);
+    };
   }, []);
 
   return (
@@ -25,17 +34,31 @@ const Nav = () => {
         alt="logo"
       />
       <Menu>
+        {input.searchOn && (
+          <InputWrap onSubmit={submit}>
+            <i className="xi-arrow-left" />
+            <Input placeholder="검색" autoFocus {...input} />
+            <i className="xi-close-thin" />
+          </InputWrap>
+        )}
         {menuItems.map((item, idx) => (
-          <Item key={idx}>{item}</Item>
+          <Item key={idx} isVisible={input.searchOn}>
+            {item}
+          </Item>
         ))}
-        <Item>
+        <Item
+          onClick={() => input.setSearchOn(true)}
+          isVisible={input.searchOn}
+        >
           <i className="xi-search" />
           검색
         </Item>
       </Menu>
       <Login>
         <i className="xi-ellipsis-v" />
-        <LoginBtn>로그인</LoginBtn>
+        <LoginBtn>
+          <span>로그인</span>
+        </LoginBtn>
       </Login>
     </NavWrap>
   );
@@ -53,7 +76,7 @@ const NavWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 16px;
+  padding: 0px 28px 0px 16px;
   transition: all 0.2s ease-in-out;
   box-shadow: 0px 5px 6px -2px rgba(0, 0, 0, 0.4);
 `;
@@ -70,7 +93,9 @@ const Menu = styled.div`
 `;
 
 const Item = styled.div`
-  margin: 22px;
+  margin: 0px 22px;
+  line-height: 48px;
+  display: ${(props) => (props.isVisible ? "none" : "")};
   cursor: pointer;
   &:hover {
     color: rgba(255, 255, 255, 1);
@@ -78,6 +103,29 @@ const Item = styled.div`
   i {
     margin-right: 22px;
   }
+`;
+
+const InputWrap = styled.form`
+  width: 860px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  background-color: rgb(35, 35, 35);
+  border: 1px solid hsl(0, 0%, 20%);
+  border-radius: 2px;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.5);
+  i {
+    margin: 0px 16px;
+    cursor: pointer;
+  }
+`;
+
+const Input = styled.input`
+  width: 100%;
+  height: 100%;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 20px;
 `;
 
 const Login = styled.div`
