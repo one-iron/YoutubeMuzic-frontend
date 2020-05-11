@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useInput } from "../CustomHooks";
+import { GoogleLogin } from "react-google-login";
+import { connect } from "react-redux";
 import styled from "styled-components";
+import axios from "axios";
+import { googleLogin, clientId } from "../Config";
+import { NavAddMenu } from "./NavAddMenu";
+import * as actions from "../action";
 
-const Nav = () => {
+const Nav = ({ handleLoginData, email, familyName, givenName, imageUrl }) => {
   const menuItems = ["홈", "핫리스트", "보관함"];
   const [isScrolled, setIsScrolled] = useState();
+  const [userImg, setUserImg] = useState(false);
   const input = useInput("");
 
   const checkScroll = (e) => {
@@ -20,8 +27,35 @@ const Nav = () => {
     input.setValue("");
   };
 
+  const LoginGoogle = async (res) => {
+    try {
+      const token = await axios({
+        method: "POST",
+        url: googleLogin,
+        data: {
+          id: res.googleId,
+          token: res.tc.id_token,
+        },
+      });
+      if (token.data.token) {
+        const { email, familyName, givenName, imageUrl } = res.profileObj;
+        localStorage.setItem("token", token.data.token);
+        localStorage.setItem("ImageUrl", imageUrl);
+        handleLoginData(email, familyName, givenName, imageUrl);
+        setUserImg(localStorage.getItem("ImageUrl"));
+      } else {
+        console.warn("Login failed, can not check google token");
+      }
+    } catch {
+      console.warn("Login failed, can not connect django api");
+    }
+  };
+
   useEffect(() => {
     document.addEventListener("scroll", checkScroll);
+    if (localStorage.getItem("ImageUrl")) {
+      setUserImg(localStorage.getItem("ImageUrl"));
+    }
     return () => {
       document.removeEventListener("scroll", checkScroll);
     };
@@ -38,7 +72,10 @@ const Nav = () => {
           <InputWrap onSubmit={submit}>
             <i className="xi-arrow-left" />
             <Input placeholder="검색" autoFocus {...input} />
-            <i className="xi-close-thin" />
+            <i
+              className="xi-close"
+              style={{ display: input.value ? "" : "none" }}
+            />
           </InputWrap>
         )}
         {menuItems.map((item, idx) => (
@@ -54,31 +91,62 @@ const Nav = () => {
           검색
         </Item>
       </Menu>
-      <Login>
-        <i className="xi-ellipsis-v" />
-        <LoginBtn>
-          <span>로그인</span>
-        </LoginBtn>
-      </Login>
+      {userImg ? (
+        <LoginedImg imageUrl={userImg} />
+      ) : (
+        <Login>
+          <i className="xi-ellipsis-v" />
+          <GoogleLogin
+            clientId={clientId}
+            render={(props) => (
+              <LoginBtn onClick={props.onClick}>
+                <span>로그인</span>
+              </LoginBtn>
+            )}
+            onSuccess={(res) => LoginGoogle(res)}
+            onFailure={(res) => console.log("Google Error", res)}
+          />
+        </Login>
+      )}
     </NavWrap>
   );
 };
 
-export default Nav;
+const mapStataeToProps = (state) => {
+  return {
+    email: state.loginData.email,
+    familyName: state.loginData.familyName,
+    givenName: state.loginData.givenName,
+    imageUrl: state.loginData.imageUrl,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleLoginData: (email, familyName, givenName, imageUrl) => {
+      dispatch(actions.getLoginData(email, familyName, givenName, imageUrl));
+    },
+  };
+};
+
+export default connect(mapStataeToProps, mapDispatchToProps)(Nav);
 
 const NavWrap = styled.div`
+  z-index: 1000;
   position: fixed;
   top: 0px;
   left: 0px;
   width: 100vw;
+  min-width: 1000px;
   height: 64px;
   background-color: ${(props) => (props.isScrolled ? "#1d1d1d" : "")};
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0px 28px 0px 16px;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0px 5px 6px -2px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.2s ease-in-out;
+  box-shadow: ${(props) =>
+    props.isScrolled ? "0px 5px 6px -2px rgba(0, 0, 0, 0.4)" : ""};
 `;
 
 const LogoImg = styled.img`
@@ -116,6 +184,7 @@ const InputWrap = styled.form`
   font-size: 24px;
   color: rgba(255, 255, 255, 0.5);
   i {
+    font-size: 22px;
     margin: 0px 16px;
     cursor: pointer;
   }
@@ -150,4 +219,14 @@ const LoginBtn = styled.div`
   border-radius: 2px;
   font-weight: 400;
   cursor: pointer;
+`;
+
+const LoginedImg = styled.div`
+  width: 32px;
+  height: 32px;
+  padding: 0px 16px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-image: url(${(props) => props.imageUrl});
 `;
