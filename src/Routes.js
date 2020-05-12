@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { GlobalStyle } from "./Config";
 import Nav from "./Components/Nav";
 import Home from "./Pages/Home/Home";
-import Player from "./Components/Player";
 
 class Routes extends React.Component {
   render() {
@@ -13,7 +12,6 @@ class Routes extends React.Component {
         <Nav />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/player" component={Player} />
         </Switch>
       </Router>
     );
