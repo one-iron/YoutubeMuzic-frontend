@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
+import MainThumbnail from "./MainThumbnail/MainThumbnail";
+import MainListFirst from "./MainListFirst/MainListFirst";
 import styled from "styled-components";
-import AritistItem from "./Item/ArtistItem";
 
 const Home = () => {
-  const [data, setData] = useState(null);
+  const [FirstAlbumData, SetFirstAlbumData] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:3000/data/MainMock.json")
+    fetch("http://localhost:3000/data/Collection1.json")
       .then((res) => res.json())
-      .then((res) => setData(res));
+      .then((res) => SetFirstAlbumData(res));
   }, []);
 
   return (
-    <HomeWrap>{data && <AritistItem itemData={data.item_list[0]} />}</HomeWrap>
+    <HomeWrap>
+      {FirstAlbumData && <MainThumbnail imgData={FirstAlbumData.main_thumb} />}
+      {FirstAlbumData && <MainListFirst data={FirstAlbumData} />}
+    </HomeWrap>
   );
 };
 
@@ -21,5 +25,4 @@ export default Home;
 const HomeWrap = styled.div`
   width: 100%;
   height: 3000px;
-  padding: 100px 50px;
 `;
