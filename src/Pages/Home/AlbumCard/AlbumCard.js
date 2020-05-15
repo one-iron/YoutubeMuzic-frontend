@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Thumbnail from "../Thumbnail/Thumbnail";
 import styled from "styled-components";
-
 const AlbumCard = (props) => {
-  // const { key, category, endpoint, title, subtitle, thumbnail } = props;
   const { title, subtitle, thumbnail } = props;
+
   return (
     <AlbumCardWrap>
       <Thumbnail thumbnail={thumbnail} />
