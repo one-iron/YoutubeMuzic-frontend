@@ -1,5 +1,11 @@
 import { createGlobalStyle } from "styled-components";
 
+export const clientId =
+  "563882109051-1vm6nvau748so36gdmpkjm028h2247as.apps.googleusercontent.com";
+//진현님 API
+const JHurl = "http://10.58.0.33:8000";
+export const googleLogin = `${JHurl}/user/signin`;
+
 //글로벌 스타일
 export const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
