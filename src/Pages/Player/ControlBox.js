@@ -1,20 +1,46 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import * as actions from "../../action";
 import styled from "styled-components";
 import {
   useCurrentTime,
   usePlayBtn,
   transTime,
   useSound,
-  useDrag,
 } from "../../CustomHooks";
 
-const ControlBox = ({ audio, isLoading, setSrc, isPlay, metaData }) => {
+const ControlBox = ({
+  audio,
+  isLoading,
+  setSrc,
+  isPlay,
+  metaData,
+  isModalOn,
+  setModalOn,
+}) => {
   const play = usePlayBtn(true);
   const currentTime = useCurrentTime(audio);
+  const [dragValue, setDragValue] = useState(false);
+  const [isHover, setHover] = useState(false);
   const sound = useSound(audio);
-  const drag = useDrag(audio);
 
   isPlay = play.isPlay;
+
+  const dragLoad = (e) => {
+    const fraction = e.x / window.innerWidth;
+    setHover(true);
+    setDragValue(fraction);
+    audio.currentTime = Number(fraction) * Number(audio.duration);
+  };
+
+  const dragLoadBtn = () => {
+    document.addEventListener("mousemove", dragLoad);
+    document.addEventListener("mouseup", () => {
+      document.removeEventListener("mousemove", dragLoad);
+      setDragValue(false);
+      setHover(false);
+    });
+  };
 
   const soundHandler = (e) => {
     const shiftX = e.movementX / 100;
@@ -66,11 +92,19 @@ const ControlBox = ({ audio, isLoading, setSrc, isPlay, metaData }) => {
   return (
     <ControlBoxWrap>
       <LoadBar
+        onMouseOver={() => setHover(true)}
+        onMouseOut={() => setHover(false)}
         style={{
-          width: String((audio.currentTime / audio.duration) * 100) + "vw",
+          width: dragValue
+            ? String(dragValue * 100) + "vw"
+            : String((audio.currentTime / audio.duration) * 100) + "vw",
+          border: isHover ? "2px solid #ff0000" : "",
         }}
       >
-        <LoadBarBtn {...drag} />
+        <LoadBarBtn
+          style={{ display: isHover ? "" : "none" }}
+          onMouseDown={() => dragLoadBtn()}
+        />
       </LoadBar>
       <ControlButtons>
         <MoveButton onClick={() => (audio.currentTime -= 10)}>
@@ -122,7 +156,7 @@ const ControlBox = ({ audio, isLoading, setSrc, isPlay, metaData }) => {
         </SoundBtn>
         <i className="xi-repeat" />
         <i className="xi-shuffle" />
-        <DownBtn>
+        <DownBtn isModalOn={isModalOn} onClick={setModalOn}>
           <i className="xi-caret-down-min" active="true" />
         </DownBtn>
       </RightControl>
@@ -130,7 +164,21 @@ const ControlBox = ({ audio, isLoading, setSrc, isPlay, metaData }) => {
   );
 };
 
-export default ControlBox;
+const mapStateToProps = (state) => {
+  return {
+    isModalOn: state.isModalOn.isModalOn,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setModalOn: () => {
+      dispatch(actions.modalOn());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ControlBox);
 
 const ControlBoxWrap = styled.div`
   width: 100vw;
@@ -184,6 +232,7 @@ const LoadBarBtn = styled.div`
   background-color: #ff0000;
   border-radius: 50%;
   transition: all 0.1s ease-in;
+  cursor: pointer;
 `;
 
 const Time = styled.div`
@@ -250,6 +299,8 @@ const SoundBtn = styled.div`
 
 const DownBtn = styled.div`
   color: #ffffff;
+  transform: ${({ isModalOn }) => (isModalOn ? "rotate(180deg)" : "")};
+  transition: all 0.2s ease-in-out;
 `;
 
 const SoundBar = styled.div`

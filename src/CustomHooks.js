@@ -88,23 +88,3 @@ export const useSound = (audio) => {
     setFull,
   };
 };
-
-export const useDrag = (audio) => {
-  const [value, setValue] = useState();
-
-  const drag = (e) => {
-    setValue(e.x / window.innerWidth);
-    console.log(value);
-  };
-
-  const onMouseDown = () => {
-    document.addEventListener("mousemove", drag);
-    console.log(11);
-  };
-
-  const onMouseUp = () => {
-    document.removeEventListener("mousemove", drag);
-  };
-
-  return { value, onMouseDown, onMouseUp };
-};
