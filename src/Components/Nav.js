@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from "react";
+import { Link, withRouter } from "react-router-dom";
 import { useInput } from "../CustomHooks";
 import { GoogleLogin } from "react-google-login";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import axios from "axios";
 import { googleLogin, clientId } from "../Config";
-import { NavAddMenu } from "./NavAddMenu";
+import NavAddMenu from "./NavAddMenu";
 import * as actions from "../action";
 
-const Nav = ({ handleLoginData, email, familyName, givenName, imageUrl }) => {
+const Nav = ({
+  handleLoginData,
+  email,
+  familyName,
+  givenName,
+  imageUrl,
+  history,
+}) => {
   const menuItems = ["홈", "핫리스트", "보관함"];
+  const [token, setToken] = useState(null);
   const [isScrolled, setIsScrolled] = useState();
   const [userImg, setUserImg] = useState(false);
+  const [isClickedUser, setClickedUser] = useState(false);
   const input = useInput("");
 
   const checkScroll = (e) => {
@@ -43,6 +53,7 @@ const Nav = ({ handleLoginData, email, familyName, givenName, imageUrl }) => {
         localStorage.setItem("ImageUrl", imageUrl);
         handleLoginData(email, familyName, givenName, imageUrl);
         setUserImg(localStorage.getItem("ImageUrl"));
+        setToken(token.data.token);
       } else {
         console.warn("Login failed, can not check google token");
       }
@@ -52,9 +63,15 @@ const Nav = ({ handleLoginData, email, familyName, givenName, imageUrl }) => {
   };
 
   useEffect(() => {
+    if (history.location.pathname === "/player") {
+      setIsScrolled(true);
+    }
     document.addEventListener("scroll", checkScroll);
     if (localStorage.getItem("ImageUrl")) {
       setUserImg(localStorage.getItem("ImageUrl"));
+    }
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
     }
     return () => {
       document.removeEventListener("scroll", checkScroll);
@@ -63,10 +80,12 @@ const Nav = ({ handleLoginData, email, familyName, givenName, imageUrl }) => {
 
   return (
     <NavWrap isScrolled={isScrolled}>
-      <LogoImg
-        src="https://s.ytimg.com/yts/img/music/web/on_platform_logo_dark-vfl_PUy2j.svg"
-        alt="logo"
-      />
+      <Link to="/">
+        <LogoImg
+          src="https://s.ytimg.com/yts/img/music/web/on_platform_logo_dark-vfl_PUy2j.svg"
+          alt="logo"
+        />
+      </Link>
       <Menu>
         {input.searchOn && (
           <InputWrap onSubmit={submit}>
@@ -91,8 +110,18 @@ const Nav = ({ handleLoginData, email, familyName, givenName, imageUrl }) => {
           검색
         </Item>
       </Menu>
-      {userImg ? (
-        <LoginedImg imageUrl={userImg} />
+      {token ? (
+        <LoginedImg
+          imageUrl={userImg}
+          onClick={() => setClickedUser(!isClickedUser)}
+        >
+          <NavAddMenu
+            isClickedUser={isClickedUser}
+            imageUrl={userImg}
+            data={{ email, familyName, givenName }}
+            setToken={setToken}
+          />
+        </LoginedImg>
       ) : (
         <Login>
           <i className="xi-ellipsis-v" />
@@ -129,7 +158,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStataeToProps, mapDispatchToProps)(Nav);
+export default connect(mapStataeToProps, mapDispatchToProps)(withRouter(Nav));
 
 const NavWrap = styled.div`
   z-index: 1000;
@@ -222,11 +251,12 @@ const LoginBtn = styled.div`
 `;
 
 const LoginedImg = styled.div`
-  width: 32px;
-  height: 32px;
-  padding: 0px 16px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
+  padding-left: 26px;
   background-size: cover;
   background-position: center;
   background-image: url(${(props) => props.imageUrl});
+  cursor: pointer;
 `;
