@@ -15,7 +15,9 @@ const MainList = (props) => {
         }}
         scrollPoint={scrollPoint}
         screenWidth={screenWidth}
-      />
+      >
+        <i className="xi-angle-left" />
+      </SlidePreviousBtn>
       <SlideNextBtn
         onClick={() => {
           scrollbar.scrollTo(1429, 0);
@@ -23,10 +25,12 @@ const MainList = (props) => {
         }}
         scrollPoint={scrollPoint}
         screenWidth={screenWidth}
-      />
+      >
+        <i className="xi-angle-right" />
+      </SlideNextBtn>
       <CollectionTitle>
         {<SubTitle>{props.data.sub_title}</SubTitle>}
-        <Title>{props.data.title}</Title>
+        <Title>{props.data.collection}</Title>
       </CollectionTitle>
 
       <CollectionAlbums
@@ -36,13 +40,13 @@ const MainList = (props) => {
         }}
       >
         <AlbumCarousel>
-          {props.data.item_list.map((albumData, idx) => (
+          {props.data.elements.map((albumData, idx) => (
             <AlbumCard
               key={idx}
-              category={albumData.category}
-              title={albumData.title}
-              subtitle={albumData.subtitle}
-              thumbnail={albumData.thumbnail}
+              thumbnail={albumData.list_thumb}
+              title={albumData.list_name}
+              type={albumData.list_type}
+              artist={albumData.list_artist}
             />
           ))}
         </AlbumCarousel>
@@ -69,6 +73,12 @@ const SlidePreviousBtn = styled.div`
   height: 45px;
   border-radius: 50%;
   background-color: white;
+  i {
+    color: black;
+    position: absolute;
+    top: 14px;
+    left: 13px;
+  }
 `;
 
 const SlideNextBtn = styled.div`
@@ -85,6 +95,12 @@ const SlideNextBtn = styled.div`
   height: 45px;
   border-radius: 50%;
   background-color: white;
+  i {
+    color: black;
+    position: absolute;
+    top: 14px;
+    right: 13px;
+  }
 `;
 
 const CollectionTitle = styled.div`
@@ -113,6 +129,7 @@ const CollectionAlbums = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
+  scroll-behavior: smooth;
 `;
 
 const AlbumCarousel = styled.div`

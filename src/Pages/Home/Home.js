@@ -1,77 +1,70 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import MainThumbnail from "./MainThumbnail/MainThumbnail";
 import MainList from "./MainList/MainList";
 import styled from "styled-components";
 
 const Home = () => {
   const [datas, setData] = useState();
+  const [thumb, setThumb] = useState();
+  const [array, setArray] = useState();
+  const [count, setCount] = useState(0);
+  const [boolean, setBoolean] = useState(false);
 
-  // collection id가 담겨진 배열을 받는 패치
+  const onScroll = useCallback(() => {
+    if (
+      count < 2 &&
+      window.scrollY >= 410 * (count === 0 ? count + 1 : count + 3)
+    ) {
+      setCount(count + 1);
+      setBoolean(true);
+    }
+  }, [count]);
+
   useEffect(() => {
-    getData();
+    if (boolean === true && count <= 3) {
+      fetch(
+        `http://10.58.2.220:8000/music/main?collection_id=${
+          array[count == 1 ? 0 : 3]
+        }&collection_id=${array[count == 1 ? 1 : 4]}&collection_id=${
+          array[count == 1 ? 2 : 5]
+        }`
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(
+            "1 :",
+            array[count === 1 ? 0 : 3],
+            "2:",
+            array[count === 1 ? 1 : 4],
+            "3",
+            array[count === 1 ? 2 : 5]
+          );
+          setData(datas.concat(res.contents));
+        });
+      setBoolean(false);
+    }
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [boolean, count, datas, onScroll]);
+
+  useEffect(() => {
+    fetch("http://10.58.2.220:8000/music/main")
+      .then((res) => res.json())
+      .then((res) => setData(res.contents));
+
+    fetch("http://10.58.2.220:8000/music/main")
+      .then((res) => res.json())
+      .then((res) => setThumb(res.main_thumb));
+
+    fetch("http://10.58.2.220:8000/music/main")
+      .then((res) => res.json())
+      .then((res) => setArray(res.range_list));
   }, []);
-
-  const getData = async () => {
-    const [
-      data1,
-      data2,
-      data3,
-      data4,
-      data5,
-      data6,
-      data7,
-      data8,
-      data9,
-    ] = await Promise.all([
-      fetch(`http://localhost:3000/data/Collection0.json`),
-      fetch(`http://localhost:3000/data/Collection1.json`),
-      fetch(`http://localhost:3000/data/Collection2.json`),
-      fetch(`http://localhost:3000/data/Collection3.json`),
-      fetch(`http://localhost:3000/data/Collection4.json`),
-      fetch(`http://localhost:3000/data/Collection5.json`),
-      fetch(`http://localhost:3000/data/Collection6.json`),
-      fetch(`http://localhost:3000/data/Collection7.json`),
-      fetch(`http://localhost:3000/data/Collection8.json`),
-    ]);
-
-    const [
-      data1Json,
-      data2Json,
-      data3Json,
-      data4Json,
-      data5Json,
-      data6Json,
-      data7Json,
-      data8Json,
-      data9Json,
-    ] = await Promise.all([
-      data1.json(),
-      data2.json(),
-      data3.json(),
-      data4.json(),
-      data5.json(),
-      data6.json(),
-      data7.json(),
-      data8.json(),
-      data9.json(),
-    ]);
-
-    setData([
-      data1Json,
-      data2Json,
-      data3Json,
-      data4Json,
-      data5Json,
-      data6Json,
-      data7Json,
-      data8Json,
-      data9Json,
-    ]);
-  };
-
+  array && console.log("arr:", array);
+  datas && console.log("datas:", datas);
   return (
     <HomeWrap>
-      {datas && <MainThumbnail imgData={datas[0].main_thumb} />}
+      {datas && <MainThumbnail imgData={thumb} />}
       <MainWrap>
         {datas &&
           datas.map((data, idx) => (
