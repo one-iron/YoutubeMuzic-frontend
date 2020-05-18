@@ -3,11 +3,14 @@ import ThreeDots from "../Images/ThreeDots";
 import styled from "styled-components";
 
 const Menu = (props) => {
-  const MenuWrap = styled.div`
-    display: ${props.isHover ? "" : "none"};
-  `;
   return (
-    <MenuWrap>
+    <MenuWrap
+      onClick={() => {
+        props.setMenuClick(!props.MenuCLick);
+        console.log(props);
+      }}
+      isHover={props.isHover}
+    >
       <ThreeDotsWrap>
         <ThreeDots />
       </ThreeDotsWrap>
@@ -16,6 +19,10 @@ const Menu = (props) => {
 };
 
 export default Menu;
+
+const MenuWrap = styled.div`
+  display: ${(props) => (props.isHover ? "" : "none")};
+`;
 
 const ThreeDotsWrap = styled.div`
   padding: 15px;

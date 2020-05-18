@@ -3,11 +3,8 @@ import PlayBtn from "../Images/PlayBtn";
 import styled from "styled-components";
 
 const Play = (props) => {
-  const PlayWrap = styled.div`
-    display: ${props.isHover ? "" : "none"};
-  `;
   return (
-    <PlayWrap>
+    <PlayWrap isHover={props.isHover}>
       <PlayBtnWrap>
         <PlayBtnBox>
           <PlayBtn />
@@ -18,6 +15,10 @@ const Play = (props) => {
 };
 
 export default Play;
+
+const PlayWrap = styled.div`
+  display: ${(props) => (props.isHover ? "" : "none")};
+`;
 
 const PlayBtnWrap = styled.div`
   padding: 15px;
