@@ -21,6 +21,12 @@ export const getSongList = (list) => {
   };
 };
 
+export const pressPlay = () => {
+  return {
+    type: types.PRESSPLAY,
+  };
+};
+
 export const modalOn = () => {
   return {
     type: types.MODALON,
@@ -39,11 +45,16 @@ export const playerOff = () => {
   };
 };
 
-export const setPlayerSrc = (src) => {
+export const setPlayerSrc = (src, thumb, name, artist, view, like) => {
   return {
     type: types.SETPLAYERSRC,
     payload: {
       src,
+      thumb,
+      name,
+      artist,
+      view,
+      like,
     },
   };
 };

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import arrayMove from "array-move";
@@ -23,11 +22,12 @@ const ListItemHOC = SortableContainer(({ items }) => {
 const Player = ({
   audio,
   songList,
-  updateSongList,
   isModalOn,
   setModalOn,
   src,
   setSrc,
+  playerOff,
+  pressPlay,
 }) => {
   const [items, setItems] = useState(false);
   const [isLoading, setLoading] = useState(false);
@@ -38,31 +38,30 @@ const Player = ({
   };
 
   const suffleItems = () => {
-    setItems(items.sort(() => 0.5 - Math.random()));
+    setItems([...items.sort(() => 0.5 - Math.random())]);
   };
 
   useEffect(() => {
-    const getData = async () => {
-      const data = await axios("http://localhost:3000/Data/PlayerMock.json");
-      const songListData = await axios(
-        "http://localhost:3000/Data/SongList.json"
-      );
-      updateSongList(songListData.data.list);
-      setItems(songListData.data.list);
-      setMetaData(data.data);
-    };
-    getData();
     audio.addEventListener("loadeddata", () => {
       setLoading(true);
     });
     return () => {
+      audio.src = "";
       audio.removeEventListener("loadeddata", () => setLoading(true));
     };
   }, []);
 
   useEffect(() => {
-    audio.src = src;
-  }, [src]);
+    audio.src = src.src;
+    setItems(songList);
+    setMetaData({
+      thumbnail: src.thumb,
+      title: src.name,
+      artist: src.artist,
+      view: src.view,
+      like: src.like,
+    });
+  }, [src, songList.list]);
 
   return (
     <>
@@ -70,14 +69,15 @@ const Player = ({
         <VideoSide isModalOn={isModalOn}>
           {metaData && (
             <ImageWrap>
-              <ImageHover>
-                <HoverIcons>
+              <ImageHover onClick={pressPlay}>
+                <HoverIcons isModalOn={isModalOn}>
                   <i
                     className={
                       isModalOn ? "xi-focus-frame" : "xi-compress-square"
                     }
                     onClick={setModalOn}
                   />
+                  <i className="xi-close" onClick={playerOff} />
                 </HoverIcons>
               </ImageHover>
               <img src={metaData.thumbnail} alt="thumbnail" />
@@ -105,20 +105,23 @@ const mapStateToProps = (state) => {
     songList: state.songList.list,
     isModalOn: state.isModalOn.isModalOn,
     audio: state.audio,
-    src: state.playerSrc.src,
+    src: state.playerSrc,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateSongList: (songList) => {
-      dispatch(actions.getSongList(songList));
-    },
     setModalOn: () => {
       dispatch(actions.modalOn());
     },
     setSrc: (src) => {
       dispatch(actions.setPlayerSrc(src));
+    },
+    playerOff: () => {
+      dispatch(actions.playerOff());
+    },
+    pressPlay: () => {
+      dispatch(actions.pressPlay());
     },
   };
 };
@@ -182,9 +185,9 @@ const ImageHover = styled.div`
 const HoverIcons = styled.div`
   text-align: right;
   color: #ffffff;
-  font-size: 24px;
+  font-size: ${({ isModalOn }) => (isModalOn ? "16px" : "24px")};
   i {
-    padding: 12px;
+    padding: ${({ isModalOn }) => (isModalOn ? "6px" : "12px")};
   }
 `;
 
