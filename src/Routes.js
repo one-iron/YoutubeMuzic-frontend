@@ -6,6 +6,7 @@ import Nav from "./Components/Nav";
 import Home from "./Pages/Home/Home";
 import Player from "./Pages/Player/Player";
 import Playlist from "./Pages/PlayList/PlayList";
+import Library from "./Pages/Library/Library";
 
 class Routes extends React.Component {
   render() {
@@ -16,6 +17,8 @@ class Routes extends React.Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/playlist/:id" component={Playlist} />
+          <Route exact path="/library" component={Library} />
+          {/* <Route exact path="/Player" component={Player} /> */}
         </Switch>
         {this.props.isPlayerOn && <Player />}
       </Router>
