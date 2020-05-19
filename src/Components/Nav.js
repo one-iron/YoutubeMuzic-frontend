@@ -155,6 +155,15 @@ const mapDispatchToProps = (dispatch) => {
     handleLoginData: (email, familyName, givenName, imageUrl) => {
       dispatch(actions.getLoginData(email, familyName, givenName, imageUrl));
     },
+    playerOn: () => {
+      dispatch(actions.playerOn());
+    },
+    playerOff: () => {
+      dispatch(actions.playerOff());
+    },
+    setSrc: (src) => {
+      dispatch(actions.setPlayerSrc(src));
+    },
   };
 };
 

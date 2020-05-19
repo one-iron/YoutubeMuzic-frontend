@@ -1,7 +1,7 @@
 import * as types from "../action/actionTypes";
 
 const initialState = {
-  isPlayerOn: false,
+  value: false,
 };
 
 const isPlayerOn = (state = initialState, action) => {

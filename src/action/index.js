@@ -27,14 +27,23 @@ export const modalOn = () => {
   };
 };
 
-export const palyerOn = () => {
+export const playerOn = () => {
   return {
     type: types.PLAYERON,
   };
 };
 
-export const palyerOff = () => {
+export const playerOff = () => {
   return {
     type: types.PLAYEROFF,
+  };
+};
+
+export const setPlayerSrc = (src) => {
+  return {
+    type: types.SETPLAYERSRC,
+    payload: {
+      src,
+    },
   };
 };

@@ -17,6 +17,7 @@ const ControlBox = ({
   metaData,
   isModalOn,
   setModalOn,
+  suffleItems,
 }) => {
   const play = usePlayBtn(true);
   const currentTime = useCurrentTime(audio);
@@ -155,7 +156,7 @@ const ControlBox = ({
           />
         </SoundBtn>
         <i className="xi-repeat" />
-        <i className="xi-shuffle" />
+        <i className="xi-shuffle" onClick={suffleItems} />
         <DownBtn isModalOn={isModalOn} onClick={setModalOn}>
           <i className="xi-caret-down-min" active="true" />
         </DownBtn>
