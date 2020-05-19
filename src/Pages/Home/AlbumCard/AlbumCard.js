@@ -9,7 +9,10 @@ const AlbumCard = (props) => {
       <Thumbnail thumbnail={thumbnail} />
       <Text>
         <Title> {title}</Title>
-        <SubTitle>{subtitle}</SubTitle>
+        <SubTitle>
+          {props.type}
+          {props.artist}
+        </SubTitle>
       </Text>
     </AlbumCardWrap>
   );
