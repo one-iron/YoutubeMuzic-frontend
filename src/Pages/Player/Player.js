@@ -20,16 +20,25 @@ const ListItemHOC = SortableContainer(({ items }) => {
   );
 });
 
-const audio = new Audio("http://localhost:3000/Data/sampleAudio.mp3");
-
-const Player = ({ songList, updateSongList, isModalOn, setModalOn }) => {
+const Player = ({
+  audio,
+  songList,
+  updateSongList,
+  isModalOn,
+  setModalOn,
+  src,
+  setSrc,
+}) => {
   const [items, setItems] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [metaData, setMetaData] = useState();
-  const [src, setSrc] = useState(""); //http://10.58.0.33:8000, http://localhost:3000/Data/sampleAudio.mp3
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setItems(arrayMove(items, oldIndex, newIndex));
+  };
+
+  const suffleItems = () => {
+    setItems(items.sort(() => 0.5 - Math.random()));
   };
 
   useEffect(() => {
@@ -41,10 +50,8 @@ const Player = ({ songList, updateSongList, isModalOn, setModalOn }) => {
       updateSongList(songListData.data.list);
       setItems(songListData.data.list);
       setMetaData(data.data);
-      setSrc(data.data.audio_file);
     };
     getData();
-
     audio.addEventListener("loadeddata", () => {
       setLoading(true);
     });
@@ -53,7 +60,10 @@ const Player = ({ songList, updateSongList, isModalOn, setModalOn }) => {
     };
   }, []);
 
-  // audio.src = src;
+  useEffect(() => {
+    audio.src = src;
+  }, [src]);
+
   return (
     <>
       <PlayerWrap isModalOn={isModalOn}>
@@ -82,9 +92,9 @@ const Player = ({ songList, updateSongList, isModalOn, setModalOn }) => {
       <ControlBox
         audio={isLoading ? audio : false}
         isLoading={isLoading}
-        setSrc={setSrc}
         isPlay={true}
         metaData={metaData}
+        suffleItems={suffleItems}
       />
     </>
   );
@@ -94,6 +104,8 @@ const mapStateToProps = (state) => {
   return {
     songList: state.songList.list,
     isModalOn: state.isModalOn.isModalOn,
+    audio: state.audio,
+    src: state.playerSrc.src,
   };
 };
 
@@ -104,6 +116,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setModalOn: () => {
       dispatch(actions.modalOn());
+    },
+    setSrc: (src) => {
+      dispatch(actions.setPlayerSrc(src));
     },
   };
 };

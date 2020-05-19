@@ -25,7 +25,11 @@ const NavAddMenu = ({
       <ProfileWrap>
         <ProfileImage imageUrl={imageUrl} />
         <ProfileInfo>
-          <p>최준영</p>asxd153@gmail.com
+          <p>
+            {data.familyName}
+            {data.givenName}
+          </p>
+          {data.email}
           <LogOutBtn onClick={() => LogOutGoogle()}>
             Google계정 로그아웃
           </LogOutBtn>
