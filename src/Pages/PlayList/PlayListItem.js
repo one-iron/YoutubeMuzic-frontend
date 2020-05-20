@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import styled from "styled-components";
 
-const EachItem = ({ item }) => {
+const PlayListItem = ({ item, playerOn }) => {
   const [isHover, setHover] = useState(false);
 
   return (
-    <EachItemWrap
+    <PlayListItemWrap
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
-      style={{ cursor: "move" }}
     >
       <LeftSide>
-        <ImageWrap>
+        <ImageWrap onClick={playerOn}>
           <ImageCover style={{ display: isHover ? "" : "none" }}>
             <i className="xi-play" />
           </ImageCover>
@@ -24,39 +22,53 @@ const EachItem = ({ item }) => {
               ? item.item_name.slice(0, 29) + "..."
               : item.item_name}
           </p>
-          <span>{item.item_artist}</span>
+          <span>
+            {item.item_artist.length > 20
+              ? item.item_artist.slice(0, 20) + "..."
+              : item.item_artist}
+          </span>
+          <Album>
+            {item.item_album.length > 25
+              ? item.item_album.slice(0, 25) + "..."
+              : item.item_album}
+          </Album>
         </InfoWrap>
       </LeftSide>
       <RightSide>
         <Icon style={{ display: isHover ? "" : "none" }}>
+          <i className="far fa-thumbs-down" />
+          <i className="far fa-thumbs-up" />
           <i className="xi-ellipsis-v" />
         </Icon>
         <Duration>{item.item_length}</Duration>
       </RightSide>
-    </EachItemWrap>
+    </PlayListItemWrap>
   );
 };
 
-export default EachItem;
+export default PlayListItem;
 
-const EachItemWrap = styled.div`
+const PlayListItemWrap = styled.div`
   height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0px 8px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  cursor: move;
 `;
 
 const LeftSide = styled.div`
+  width: 70%;
   display: flex;
   align-items: center;
+  width: 100%;
 `;
 
 const RightSide = styled.div`
+  width: 30%;
   display: felx;
   align-items: center;
+  justify-content: end;
   color: #aaaaaa;
 `;
 
@@ -86,24 +98,37 @@ const ItemImage = styled.div`
 `;
 
 const InfoWrap = styled.div`
+  width: 100%;
   font-size: 14px;
   padding-right: 10px;
+  display: flex;
+  align-items: center;
   p {
+    width: 40%;
     font-size: 15px;
     color: #ffffff;
-    margin-bottom: 8px;
+    margin: 0px 12px 8px 0px;
   }
   span {
+    width: 30%;
     color: #aaaaaa;
   }
+`;
+
+const Album = styled.div`
+  width: 30%;
+  color: #aaaaaa;
 `;
 
 const Icon = styled.div`
   font-size: 24px;
   padding: 0px 8px;
+  i {
+    margin-left: 24px;
+  }
 `;
 
 const Duration = styled.div`
   font-size: 14px;
-  padding-left: 8px;
+  padding-left: 36px;
 `;

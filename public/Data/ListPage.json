@@ -15,7 +15,9 @@
       "item_artist": "볼빨간사춘기",
       "item_album": "",
       "item_length": "3:46",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 217,
@@ -24,7 +26,9 @@
       "item_artist": "아이유(IU)",
       "item_album": "에잇",
       "item_length": "2:48",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 218,
@@ -33,7 +37,9 @@
       "item_artist": "태연(TAEYEON)",
       "item_album": "",
       "item_length": "3:46",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 219,
@@ -42,7 +48,9 @@
       "item_artist": "GRAY",
       "item_album": "Dingo X GRAY - Moon Blue",
       "item_length": "3:15",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 220,
@@ -51,7 +59,9 @@
       "item_artist": "미도와 파라솔",
       "item_album": "슬기로운 의사생활 HOSPITAL PLAYLIST OST Part 10",
       "item_length": "2:39",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 221,
@@ -60,7 +70,9 @@
       "item_artist": "DAY6(데이식스)",
       "item_album": "The Book of Us : The Demon",
       "item_length": "3:30",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 222,
@@ -69,7 +81,9 @@
       "item_artist": "볼빨간사춘기",
       "item_album": "",
       "item_length": "3:23",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 223,
@@ -78,7 +92,9 @@
       "item_artist": "Katy Perry",
       "item_album": "Daisies",
       "item_length": "2:54",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 224,
@@ -87,7 +103,9 @@
       "item_artist": "뉴이스트(NU'EST)",
       "item_album": "",
       "item_length": "3:20",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 225,
@@ -96,7 +114,9 @@
       "item_artist": "백지영 및 옹성우",
       "item_album": "아무런 말들도",
       "item_length": "3:44",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 226,
@@ -105,7 +125,9 @@
       "item_artist": "Raiden 및 CHANYEOL",
       "item_album": "Yours",
       "item_length": "3:56",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 227,
@@ -114,7 +136,9 @@
       "item_artist": "먼데이 키즈(Monday Kiz) 및 KEN",
       "item_album": "견뎌야 하는 우리에게",
       "item_length": "4:10",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 228,
@@ -123,7 +147,9 @@
       "item_artist": "Kygo 및 OneRepublic",
       "item_album": "Lose Somebody",
       "item_length": "3:20",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 229,
@@ -132,7 +158,9 @@
       "item_artist": "폴킴(Paul Kim)",
       "item_album": "",
       "item_length": "4:05",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 230,
@@ -141,7 +169,9 @@
       "item_artist": "Lee So Ra",
       "item_album": "HOSPITAL PLAYLIST (Original Television Soundtrack), Pt. 9",
       "item_length": "4:32",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 231,
@@ -150,7 +180,9 @@
       "item_artist": "빈첸(VINXEN)",
       "item_album": "노을 (Feat.오반)",
       "item_length": "3:48",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 232,
@@ -159,7 +191,9 @@
       "item_artist": "조나스 브라더스",
       "item_album": "",
       "item_length": "3:07",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 233,
@@ -168,7 +202,9 @@
       "item_artist": "twlv, Uneducated Kid, YUZION 및 SUPERBEE",
       "item_album": "Dingo X Yng & Rich Records - trotrap 트로트랩",
       "item_length": "3:34",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 234,
@@ -177,7 +213,9 @@
       "item_artist": "스톰지",
       "item_album": "",
       "item_length": "3:42",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 235,
@@ -186,7 +224,9 @@
       "item_artist": "Future(퓨처)",
       "item_album": "High Off Life",
       "item_length": "2:48",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 236,
@@ -195,7 +235,9 @@
       "item_artist": "pH-1",
       "item_album": "",
       "item_length": "2:49",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 237,
@@ -204,7 +246,9 @@
       "item_artist": "Way Ched",
       "item_album": "2MONTHS",
       "item_length": "2:52",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 238,
@@ -213,7 +257,9 @@
       "item_artist": "트케이 메이자",
       "item_album": "",
       "item_length": "3:51",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 239,
@@ -222,7 +268,9 @@
       "item_artist": "1theK (원더케이)",
       "item_album": "",
       "item_length": "4:02",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 240,
@@ -231,7 +279,9 @@
       "item_artist": "선우정아",
       "item_album": "더 킹 : 영원의 군주 OST Part 7",
       "item_length": "3:33",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 241,
@@ -240,7 +290,9 @@
       "item_artist": "신예영",
       "item_album": "",
       "item_length": "4:11",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 242,
@@ -249,7 +301,9 @@
       "item_artist": "새소년",
       "item_album": "",
       "item_length": "4:11",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 243,
@@ -258,7 +312,9 @@
       "item_artist": "다비치",
       "item_album": "The King: Eternal Monarch (Original Television Soundtrack), Pt. 6",
       "item_length": "3:56",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 244,
@@ -267,7 +323,9 @@
       "item_artist": "마마무(MAMAMOO)",
       "item_album": "",
       "item_length": "4:18",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 245,
@@ -276,7 +334,9 @@
       "item_artist": "Charli XCX",
       "item_album": "how i'm feeling now",
       "item_length": "3:44",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 246,
@@ -285,7 +345,9 @@
       "item_artist": "Sung Si Kyung",
       "item_album": "And we go",
       "item_length": "3:21",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 247,
@@ -294,7 +356,9 @@
       "item_artist": "볼빨간사춘기",
       "item_album": "사춘기집Ⅱ 꽃 본 나비",
       "item_length": "3:04",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 248,
@@ -303,7 +367,9 @@
       "item_artist": "Ariana Grande(아리아나 그란데) 및 Justin Bieber(저스틴 비버)",
       "item_album": "",
       "item_length": "4:18",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 249,
@@ -312,7 +378,9 @@
       "item_artist": "서제이 Seo J",
       "item_album": "우리의 이별엔 이유가 있었다 The Reason",
       "item_length": "4:17",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 250,
@@ -321,7 +389,9 @@
       "item_artist": "이수영",
       "item_album": "",
       "item_length": "4:18",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 251,
@@ -330,7 +400,9 @@
       "item_artist": "하성운",
       "item_album": "The King: Eternal Monarch (Original Television Soundtrack), Pt. 5",
       "item_length": "3:50",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 252,
@@ -339,7 +411,9 @@
       "item_artist": "순순희, 순순희 SoonSoonHee",
       "item_album": "",
       "item_length": "3:32",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 253,
@@ -348,7 +422,9 @@
       "item_artist": "임재현",
       "item_album": "",
       "item_length": "6:33",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 254,
@@ -357,7 +433,9 @@
       "item_artist": "레이니",
       "item_album": "",
       "item_length": "3:45",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 255,
@@ -366,7 +444,9 @@
       "item_artist": "BVNDIT",
       "item_album": "",
       "item_length": "3:07",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 256,
@@ -375,7 +455,9 @@
       "item_artist": "오마이걸(OH MY GIRL)",
       "item_album": "",
       "item_length": "3:25",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 257,
@@ -384,7 +466,9 @@
       "item_artist": "아스트로(ASTRO)",
       "item_album": "",
       "item_length": "3:28",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 258,
@@ -393,7 +477,9 @@
       "item_artist": "Motte",
       "item_album": "Time Lag 시차",
       "item_length": "3:40",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 259,
@@ -402,7 +488,9 @@
       "item_artist": "마크툽",
       "item_album": "",
       "item_length": "4:35",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 260,
@@ -411,7 +499,9 @@
       "item_artist": "레논 스텔라",
       "item_album": "",
       "item_length": "2:41",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 261,
@@ -420,7 +510,9 @@
       "item_artist": "안현정 (An Hyun Jung)",
       "item_album": "Tone Project Vol. 2 Picasso",
       "item_length": "3:36",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 262,
@@ -429,7 +521,9 @@
       "item_artist": "임세준",
       "item_album": "관계",
       "item_length": "4:08",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 263,
@@ -438,7 +532,9 @@
       "item_artist": "ARO",
       "item_album": "Carry",
       "item_length": "3:00",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 264,
@@ -447,7 +543,9 @@
       "item_artist": "손디아",
       "item_album": "",
       "item_length": "4:13",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     },
     {
       "item_id": 265,
@@ -456,7 +554,9 @@
       "item_artist": "나띠 (NATTY)",
       "item_album": "",
       "item_length": "3:33",
-      "item_src": "http://localhost:3000/Data/sampleAudio.mp3"
+      "item_src": "http://localhost:3000/Data/sampleAudio.mp3",
+      "view": "1130만",
+      "like": "18만"
     }
   ]
 }

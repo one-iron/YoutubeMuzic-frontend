@@ -5,6 +5,7 @@ import isModalOn from "./isModalOn";
 import isPlayerOn from "./isPlayerOn";
 import audio from "./audio";
 import playerSrc from "./playerSrc";
+import isPlay from "./isPlay";
 
 const reducers = combineReducers({
   loginData,
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   isPlayerOn,
   audio,
   playerSrc,
+  isPlay,
 });
 
 export default reducers;

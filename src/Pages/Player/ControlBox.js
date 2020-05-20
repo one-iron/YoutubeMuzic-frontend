@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../action";
 import styled from "styled-components";
-import {
-  useCurrentTime,
-  usePlayBtn,
-  transTime,
-  useSound,
-} from "../../CustomHooks";
+import { useCurrentTime, transTime, useSound } from "../../CustomHooks";
 
 const ControlBox = ({
   audio,
@@ -18,14 +13,12 @@ const ControlBox = ({
   isModalOn,
   setModalOn,
   suffleItems,
+  pressPlay,
 }) => {
-  const play = usePlayBtn(true);
   const currentTime = useCurrentTime(audio);
   const [dragValue, setDragValue] = useState(false);
   const [isHover, setHover] = useState(false);
   const sound = useSound(audio);
-
-  isPlay = play.isPlay;
 
   const dragLoad = (e) => {
     const fraction = e.x / window.innerWidth;
@@ -111,7 +104,7 @@ const ControlBox = ({
         <MoveButton onClick={() => (audio.currentTime -= 10)}>
           <i className="xi-step-backward" />
         </MoveButton>
-        <PlayButton {...play}>
+        <PlayButton onClick={pressPlay}>
           <i className={`xi-${isPlay ? "pause" : "play"}`} />
         </PlayButton>
         <MoveButton onClick={() => (audio.currentTime += 10)}>
@@ -168,6 +161,7 @@ const ControlBox = ({
 const mapStateToProps = (state) => {
   return {
     isModalOn: state.isModalOn.isModalOn,
+    isPlay: state.isPlay,
   };
 };
 
@@ -175,6 +169,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setModalOn: () => {
       dispatch(actions.modalOn());
+    },
+    pressPlay: () => {
+      dispatch(actions.pressPlay());
     },
   };
 };
