@@ -23,7 +23,7 @@ const Home = () => {
   useEffect(() => {
     if (boolean === true && count <= 3) {
       fetch(
-        `http://10.58.2.220:8000/music/main?collection_id=${
+        `http://10.58.7.4:8000/music/main?collection_id=${
           array[count == 1 ? 0 : 3]
         }&collection_id=${array[count == 1 ? 1 : 4]}&collection_id=${
           array[count == 1 ? 2 : 5]
@@ -48,15 +48,15 @@ const Home = () => {
   }, [boolean, count, datas, onScroll]);
 
   useEffect(() => {
-    fetch("http://10.58.2.220:8000/music/main")
+    fetch("http://10.58.7.4:8000/music/main")
       .then((res) => res.json())
       .then((res) => setData(res.contents));
 
-    fetch("http://10.58.2.220:8000/music/main")
+    fetch("http://10.58.7.4:8000/music/main")
       .then((res) => res.json())
       .then((res) => setThumb(res.main_thumb));
 
-    fetch("http://10.58.2.220:8000/music/main")
+    fetch("http://10.58.7.4:8000/music/main")
       .then((res) => res.json())
       .then((res) => setArray(res.range_list));
   }, []);

@@ -55,11 +55,11 @@ const Player = ({
     audio.src = src.src;
     setItems(songList);
     setMetaData({
+      id: src.id,
       thumbnail: src.thumb,
       title: src.name,
       artist: src.artist,
-      view: src.view,
-      like: src.like,
+      album: src.album,
     });
   }, [src, songList.list]);
 
@@ -86,13 +86,14 @@ const Player = ({
         </VideoSide>
         <RightSide isModalOn={isModalOn}>
           <ListTop>목록</ListTop>
-          {items && <ListItemHOC items={items} onSortEnd={onSortEnd} />}
+          {items && (
+            <ListItemHOC items={items} onSortEnd={onSortEnd} pressDelay={200} />
+          )}
         </RightSide>
       </PlayerWrap>
       <ControlBox
         audio={isLoading ? audio : false}
         isLoading={isLoading}
-        isPlay={true}
         metaData={metaData}
         suffleItems={suffleItems}
       />
@@ -111,7 +112,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setModalOn: () => {
+    setModalOn: (e) => {
+      e.stopPropagation();
       dispatch(actions.modalOn());
     },
     setSrc: (src) => {
@@ -120,7 +122,8 @@ const mapDispatchToProps = (dispatch) => {
     playerOff: () => {
       dispatch(actions.playerOff());
     },
-    pressPlay: () => {
+    pressPlay: (e) => {
+      e.stopPropagation();
       dispatch(actions.pressPlay());
     },
   };
@@ -130,10 +133,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(Player);
 
 const PlayerWrap = styled.div`
   position: fixed;
-  top: ${({ isModalOn }) => (isModalOn ? "" : "0px")};
-  left: ${({ isModalOn }) => (isModalOn ? "" : "0px")};
-  bottom: ${({ isModalOn }) => (isModalOn ? "90px" : "")};
-  right: ${({ isModalOn }) => (isModalOn ? "50px" : "")};
+  bottom: ${({ isModalOn }) => (isModalOn ? "90px" : "0px")};
+  right: ${({ isModalOn }) => (isModalOn ? "50px" : "0px")};
   width: ${({ isModalOn }) => (isModalOn ? "180px" : "100vw")};
   height: ${({ isModalOn }) => (isModalOn ? "180px" : "100vh")};
   padding: ${({ isModalOn }) => (isModalOn ? "0px" : "88px 48px 72px")};

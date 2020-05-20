@@ -1,21 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import * as actions from "../../action";
 
-const EachItem = ({ item }) => {
+const EachItem = ({ item, isPlay, setAudioSrc, nowPlayTitle, pressPlay }) => {
   const [isHover, setHover] = useState(false);
+  const [isPlayOn, setPlayOn] = useState(false);
+
+  const clickPlay = () => {
+    setAudioSrc(
+      item.item_src,
+      item.item_thumb,
+      item.item_name,
+      item.item_artist,
+      item.view,
+      item.like
+    );
+  };
+
+  useEffect(() => {
+    if (nowPlayTitle === item.item_name) {
+      setPlayOn(true);
+    } else {
+      setPlayOn(false);
+    }
+  }, [nowPlayTitle]);
 
   return (
     <EachItemWrap
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
-      style={{ cursor: "move" }}
+      isPlayOn={isPlayOn}
     >
       <LeftSide>
         <ImageWrap>
-          <ImageCover style={{ display: isHover ? "" : "none" }}>
-            <i className="xi-play" />
-          </ImageCover>
+          {isPlayOn ? (
+            <ImageCover>
+              <i
+                className={`xi-${isPlay ? "pause" : "play"}`}
+                onClick={pressPlay}
+              />
+            </ImageCover>
+          ) : (
+            <ImageCover
+              style={{ display: isHover ? "" : "none" }}
+              onClick={clickPlay}
+            >
+              <i className="xi-play" />
+            </ImageCover>
+          )}
           <ItemImage imageUrl={item.item_thumb} />
         </ImageWrap>
         <InfoWrap>
@@ -37,7 +71,25 @@ const EachItem = ({ item }) => {
   );
 };
 
-export default EachItem;
+const mapStateToProps = (state) => {
+  return {
+    isPlay: state.isPlay,
+    nowPlayTitle: state.playerSrc.name,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setAudioSrc: (src, thumb, name, artist, view, like) => {
+      dispatch(actions.setPlayerSrc(src, thumb, name, artist, view, like));
+    },
+    pressPlay: () => {
+      dispatch(actions.pressPlay());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EachItem);
 
 const EachItemWrap = styled.div`
   height: 70px;
@@ -47,6 +99,8 @@ const EachItemWrap = styled.div`
   padding: 0px 8px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   cursor: move;
+  background-color: ${({ isPlayOn }) =>
+    isPlayOn ? "rgba(255,255,255,0.1)" : ""};
 `;
 
 const LeftSide = styled.div`

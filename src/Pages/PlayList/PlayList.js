@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { playListPageData, postRecentPlayList } from "../../Config";
 import axios from "axios";
 import styled from "styled-components";
 import PlayListItem from "./PlayListItem";
@@ -20,6 +21,7 @@ const PlayList = ({
     playerOn();
     setPlayerSongList(list);
     setAudioSrc(
+      item.item_id,
       item.item_src,
       item.item_thumb,
       item.item_name,
@@ -27,7 +29,14 @@ const PlayList = ({
       item.view,
       item.like
     );
-    //src, thumb, name, artist, view, like
+
+    if (localStorage.getItem("token")) {
+      axios.post(
+        postRecentPlayList,
+        { playlist_id: match.params.id },
+        { headers: { Authorization: localStorage.getItem("token") } }
+      );
+    }
   };
 
   const suffleList = () => {
@@ -36,9 +45,9 @@ const PlayList = ({
 
   useEffect(() => {
     const getData = async () => {
-      const data = await axios("http://localhost:3000/Data/ListPage.json");
+      const data = await axios(`${playListPageData}${match.params.id}`);
       //http://localhost:3000/Data/ListPage.json
-      //http://10.58.2.220:8000/music/list/2
+      //http://10.58.7.4:8000/music/list/${match.params.id}
       setList(data.data.elements);
       setMeta(data.data.list_meta);
       setLoading(true);
@@ -57,11 +66,7 @@ const PlayList = ({
   return (
     <PlayListWrap>
       <TopWrap>
-        <TitleImage
-          imageUrl={
-            "https://lh3.googleusercontent.com/3XIuJhzzjLFBD06g6CTfDpuVyzALdFUJ9G2PepcTMB5xl1yJ3KEEnIQT60mA0cUley90HTH2vQ=w544-h544-l90-rj"
-          }
-        />
+        <TitleImage imageUrl={meta.list_thumb} />
         <InfoWrap>
           <Title>{meta.list_name}</Title>
           <Info>
@@ -111,8 +116,8 @@ const mapDispatchToProps = (dispatch) => {
     setPlayerSongList: (list) => {
       dispatch(actions.getSongList(list));
     },
-    setAudioSrc: (src, thumb, name, artist, view, like) => {
-      dispatch(actions.setPlayerSrc(src, thumb, name, artist, view, like));
+    setAudioSrc: (id, src, thumb, name, artist, view, like) => {
+      dispatch(actions.setPlayerSrc(id, src, thumb, name, artist, view, like));
     },
   };
 };
