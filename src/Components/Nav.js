@@ -82,7 +82,7 @@ const Nav = ({
     };
   }, []);
 
-  const test = (click) => {
+  const checkToken = (click) => {
     localStorage.getItem("token") ? history.push("/library") : click();
   };
 
@@ -117,7 +117,7 @@ const Nav = ({
           render={(props) => (
             <Item
               isVisible={input.searchOn}
-              onClick={() => test(props.onClick)}
+              onClick={() => checkToken(props.onClick)}
             >
               <span>보관함</span>
             </Item>

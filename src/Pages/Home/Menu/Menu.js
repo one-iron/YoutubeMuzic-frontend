@@ -7,7 +7,6 @@ const Menu = (props) => {
     <MenuWrap
       onClick={() => {
         props.setMenuClick(!props.MenuCLick);
-        console.log(props);
       }}
       isHover={props.isHover}
     >

@@ -46,8 +46,6 @@ const PlayList = ({
   useEffect(() => {
     const getData = async () => {
       const data = await axios(`${playListPageData}${match.params.id}`);
-      //http://localhost:3000/Data/ListPage.json
-      //http://10.58.7.4:8000/music/list/${match.params.id}
       setList(data.data.elements);
       setMeta(data.data.list_meta);
       setLoading(true);

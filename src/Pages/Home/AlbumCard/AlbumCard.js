@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Thumbnail from "../Thumbnail/Thumbnail";
 import styled from "styled-components";
 const AlbumCard = (props) => {
@@ -6,7 +6,7 @@ const AlbumCard = (props) => {
 
   return (
     <AlbumCardWrap>
-      <Thumbnail thumbnail={thumbnail} />
+      <Thumbnail id={props.id} thumbnail={thumbnail} />
       <Text>
         <Title> {title}</Title>
         <SubTitle>
