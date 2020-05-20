@@ -10,8 +10,7 @@ const Library = () => {
     fetch(API, {
       method: "GET",
       headers: {
-        Authorization:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjV9.3QK2UMqDzxSwXReg0IbjeBiuoLVQsG57Tw818QlesSI",
+        Authorization: localStorage.getItem("token"),
       },
     })
       .then((res) => res.json())
