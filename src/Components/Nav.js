@@ -17,7 +17,7 @@ const Nav = ({
   imageUrl,
   history,
 }) => {
-  const menuItems = ["홈", "핫리스트", "보관함"];
+  const menuItems = ["홈", "핫리스트"];
   const [token, setToken] = useState(null);
   const [isScrolled, setIsScrolled] = useState();
   const [userImg, setUserImg] = useState(false);
@@ -78,6 +78,10 @@ const Nav = ({
     };
   }, []);
 
+  const test = (click) => {
+    localStorage.getItem("token") ? history.push("/library") : click();
+  };
+
   return (
     <NavWrap isScrolled={isScrolled}>
       <Link to="/">
@@ -102,6 +106,19 @@ const Nav = ({
             {item}
           </Item>
         ))}
+        <GoogleLogin
+          clientId={clientId}
+          render={(props) => (
+            <Item
+              isVisible={input.searchOn}
+              onClick={() => test(props.onClick)}
+            >
+              <span>보관함</span>
+            </Item>
+          )}
+          onSuccess={(res) => LoginGoogle(res)}
+          onFailure={(res) => console.log("Google Error", res)}
+        />
         <Item
           onClick={() => input.setSearchOn(true)}
           isVisible={input.searchOn}
