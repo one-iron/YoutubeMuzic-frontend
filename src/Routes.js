@@ -34,4 +34,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, "")(Routes);
+export default connect(mapStateToProps, null)(Routes);

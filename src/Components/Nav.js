@@ -41,6 +41,7 @@ const Nav = ({
   };
 
   const LoginGoogle = async (res) => {
+    console.log(res);
     try {
       const token = await axios({
         method: "POST",
