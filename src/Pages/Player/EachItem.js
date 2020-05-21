@@ -10,7 +10,8 @@ const EachItem = ({ item, isPlay, setAudioSrc, nowPlayTitle, pressPlay }) => {
 
   const clickPlay = () => {
     setAudioSrc(
-      item.item_src,
+      item.item_id,
+      "/data/sampleAudio.mp3",
       item.item_thumb,
       item.item_name,
       item.item_artist,
@@ -26,7 +27,6 @@ const EachItem = ({ item, isPlay, setAudioSrc, nowPlayTitle, pressPlay }) => {
       setPlayOn(false);
     }
   }, [nowPlayTitle]);
-
   return (
     <EachItemWrap
       onMouseOver={() => setHover(true)}
@@ -38,7 +38,7 @@ const EachItem = ({ item, isPlay, setAudioSrc, nowPlayTitle, pressPlay }) => {
           {isPlayOn ? (
             <ImageCover>
               <i
-                className={`xi-${isPlay ? "pause" : "play"}`}
+                className={`xi-${isPlay ? "volume-up" : "play"}`}
                 onClick={pressPlay}
               />
             </ImageCover>
@@ -127,8 +127,12 @@ const ImageCover = styled.div`
   height: 32px;
   background-color: rgba(0, 0, 0, 0.8);
   color: #ffffff;
-  font-size: 32px;
+
   cursor: pointer;
+  i {
+    font-size: 24px;
+    padding: 4px;
+  }
 `;
 
 const ItemImage = styled.div`

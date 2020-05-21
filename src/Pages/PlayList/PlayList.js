@@ -22,19 +22,19 @@ const PlayList = ({
     setPlayerSongList(list);
     setAudioSrc(
       item.item_id,
-      item.item_src,
+      "/data/sampleAudio.mp3",
       item.item_thumb,
       item.item_name,
       item.item_artist,
       item.view,
       item.like
     );
-
-    if (localStorage.getItem("token")) {
+    const token = localStorage.getItem("token");
+    if (token) {
       axios.post(
         postRecentPlayList,
         { playlist_id: match.params.id },
-        { headers: { Authorization: localStorage.getItem("token") } }
+        { headers: { Authorization: token } }
       );
     }
   };
@@ -183,6 +183,7 @@ const Buttons = styled.div`
   i {
     font-size: 24px;
     margin-right: 8px;
+    cursor: pointer;
   }
   span {
     line-height: 35px;
@@ -213,6 +214,7 @@ const AddBtn = styled.div`
   align-items: center;
   border: 1px solid #ffffff;
   border-radius: 2px;
+  cursor: pointer;
 `;
 
 const MoreIcon = styled.div`

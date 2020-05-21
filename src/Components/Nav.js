@@ -23,7 +23,7 @@ const Nav = ({
   ];
   const [token, setToken] = useState(null);
   const [isScrolled, setIsScrolled] = useState();
-  const [userImg, setUserImg] = useState(false);
+  const [img, setimg] = useState(false);
   const [isClickedUser, setClickedUser] = useState(false);
   const input = useInput("");
 
@@ -54,9 +54,12 @@ const Nav = ({
       if (token.data.token) {
         const { email, familyName, givenName, imageUrl } = res.profileObj;
         localStorage.setItem("token", token.data.token);
-        localStorage.setItem("ImageUrl", imageUrl);
+        localStorage.setItem("imageUrl", imageUrl);
+        setimg(imageUrl);
+        localStorage.setItem("email", email);
+        localStorage.setItem("familyName", familyName);
+        localStorage.setItem("givenName", givenName);
         handleLoginData(email, familyName, givenName, imageUrl);
-        setUserImg(localStorage.getItem("ImageUrl"));
         setToken(token.data.token);
       } else {
         console.warn("Login failed, can not check google token");
@@ -67,12 +70,12 @@ const Nav = ({
   };
 
   useEffect(() => {
+    setimg(localStorage.getItem("imageUrl"));
     if (history.location.pathname === "/player") {
       setIsScrolled(true);
     }
     document.addEventListener("scroll", checkScroll);
     if (localStorage.getItem("ImageUrl")) {
-      setUserImg(localStorage.getItem("ImageUrl"));
     }
     if (localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
@@ -85,7 +88,6 @@ const Nav = ({
   const test = (click) => {
     localStorage.getItem("token") ? history.push("/library") : click();
   };
-
   return (
     <NavWrap isScrolled={isScrolled}>
       <Link to="/">
@@ -135,15 +137,10 @@ const Nav = ({
       </Menu>
       {token ? (
         <LoginedImg
-          imageUrl={userImg}
+          imageUrl={img}
           onClick={() => setClickedUser(!isClickedUser)}
         >
-          <NavAddMenu
-            isClickedUser={isClickedUser}
-            imageUrl={userImg}
-            data={{ email, familyName, givenName }}
-            setToken={setToken}
-          />
+          <NavAddMenu isClickedUser={isClickedUser} setToken={setToken} />
         </LoginedImg>
       ) : (
         <Login>
