@@ -9,7 +9,10 @@ const NavAddMenu = ({ isClickedUser, history, handleLoginData, setToken }) => {
 
   const LogOutGoogle = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("userInfo");
+    localStorage.removeItem("imageUrl");
+    localStorage.removeItem("familyName");
+    localStorage.removeItem("givenName");
+    localStorage.removeItem("email");
     history.push("/");
     handleLoginData("", "", "", "");
     setToken(null);

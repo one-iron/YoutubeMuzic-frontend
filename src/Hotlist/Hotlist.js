@@ -1,13 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { getHotListData } from "../Config";
 import ArtistCard from "./ArtistCard";
-import Listbox from "./Listbox";
-
-const API_URL = "";
 
 class Hotlist extends React.Component {
-  // --------여기 함수 만들기 ------------
-
   constructor() {
     super();
 
@@ -17,27 +13,18 @@ class Hotlist extends React.Component {
   }
 
   componentDidMount() {
-    fetch("./Data/HotListData.json")
-      // ./Data/HotListData.json
-      // http://10.58.7.53:8000/music/hot
+    fetch(getHotListData)
       .then((data) => data.json())
       .then((data) => {
         console.log(data);
         this.setState({
-          // data: { contents: data.element },
-          data, //moc data
+          data: { contents: data.element },
         });
       });
   }
 
-  onClickJoin = () => {
-    this.props.history.push("/player");
-  };
-
   render() {
-    console.log(this.state.data);
     const { contents } = this.state.data;
-    // 두리님이 두번 알려준거 위것을 줄여준다는 뜻
     return (
       <div>
         <S_line>
@@ -48,7 +35,7 @@ class Hotlist extends React.Component {
         </S_line>
         <C_line>
           <D_line>
-            <ArtistCardContainer onClick={this.onClickJoin}>
+            <ArtistCardContainer>
               {contents.map((content) => (
                 <ArtistCard
                   thumb={content.thumb}

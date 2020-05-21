@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { playListPageData, postRecentPlayList } from "../../../Config";
 import PlayBtn from "../Images/PlayBtn";
 import * as actions from "../../../action";
-import { API } from "../../../Config";
 import styled from "styled-components";
-import { HJurl } from "../../../Config";
-import { JHurl } from "../../../Config";
 
 const Play = ({ isHover, id, playerOn, setPlayerSongList, setAudioSrc }) => {
   const [list, setList] = useState();
 
   const playMusic = (e, id) => {
     e.stopPropagation();
-
-    fetch(`${API}/music/list/${id}`)
+    fetch(`${playListPageData}${id}`)
       .then((data) => data.json())
       .then((data) => setList(data.elements));
 
-    fetch(`${API}/user/recent/playlist`, {
+    fetch(postRecentPlayList, {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -33,8 +30,8 @@ const Play = ({ isHover, id, playerOn, setPlayerSongList, setAudioSrc }) => {
     list && setPlayerSongList(list);
     list &&
       setAudioSrc(
-        list[0].itme_id,
-        list[0].item_src,
+        list[0].item_id,
+        "http://localhost:3000/Data/sampleAudio.mp3",
         list[0].item_thumb,
         list[0].item_name,
         list[0].item_artist,
@@ -62,8 +59,8 @@ const mapDispatchToProps = (dispatch) => {
     setPlayerSongList: (list) => {
       dispatch(actions.getSongList(list));
     },
-    setAudioSrc: (src, thumb, name, artist, view, like) => {
-      dispatch(actions.setPlayerSrc(src, thumb, name, artist, view, like));
+    setAudioSrc: (id, src, thumb, name, artist, view, like) => {
+      dispatch(actions.setPlayerSrc(id, src, thumb, name, artist, view, like));
     },
   };
 };
