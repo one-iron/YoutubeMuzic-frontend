@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AlbumCard from "../AlbumCard/AlbumCard";
 import styled from "styled-components";
 
@@ -6,6 +6,7 @@ const MainList = (props) => {
   let scrollbar = null;
   const [scrollPoint, setScroll] = useState();
   const [screenWidth, setWidth] = useState(window.screen.width);
+
   return (
     <MainListWrap>
       <SlidePreviousBtn
@@ -43,6 +44,7 @@ const MainList = (props) => {
           {props.data.elements.map((albumData, idx) => (
             <AlbumCard
               key={idx}
+              id={albumData.list_id}
               thumbnail={albumData.list_thumb}
               title={albumData.list_name}
               type={albumData.list_type}

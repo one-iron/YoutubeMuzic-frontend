@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import Menu from "../Menu/Menu";
 import Play from "../Play/Play";
 import styled from "styled-components";
@@ -7,20 +8,24 @@ const Thumbnail = (props) => {
   const [Hover, SetHover] = useState(false);
   const [MenuClick, setMenuClick] = useState(false);
 
+  const goToAlbum = (id) => {
+    props.history.push(`/playlist/${id}`);
+  };
   return (
     <ThumbnailWrap
       onMouseEnter={() => SetHover(true)}
       onMouseLeave={() => SetHover(false)}
+      onClick={() => goToAlbum(props.id)}
       thumbnail={props.thumbnail}
     >
       <Menu isHover={Hover} MenuClick={MenuClick} setMenuClick={setMenuClick}>
         <MenuModal MenuClick={MenuClick}></MenuModal>
       </Menu>
-      <Play isHover={Hover} />
+      <Play isHover={Hover} id={props.id} />
     </ThumbnailWrap>
   );
 };
-export default Thumbnail;
+export default withRouter(Thumbnail);
 
 const ThumbnailWrap = styled.div`
   display: flex;
@@ -47,6 +52,7 @@ const ThumbnailWrap = styled.div`
     border-radius: 5px;
     background-size: cover;
     transition-timing-function: linear;
+    cursor: pointer;
   }
 `;
 
