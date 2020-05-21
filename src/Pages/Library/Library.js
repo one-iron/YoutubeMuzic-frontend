@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LibraryList from "./LibraryList/LibraryList";
 import styled from "styled-components";
+import Locker from "../../Pages/Locker/Locker";
 
 const Library = () => {
   const API = "http://10.58.0.33:8000/user/recent/playlist";
@@ -21,6 +22,7 @@ const Library = () => {
       <Title>{libraryData && libraryData.collection}</Title>
       {libraryData && <LibraryList data={libraryData.elements} />}
       <LibraryTab></LibraryTab>
+      <Locker />
     </LibraryWrap>
   );
 };

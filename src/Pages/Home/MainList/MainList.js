@@ -125,6 +125,7 @@ const CollectionAlbums = styled.div`
   line-height: 1.3;
   letter-spacing: -0.01em;
   overflow-x: scroll;
+  scroll-behavior: smooth;
   margin: 32px 100px 16px 100px;
   ::-webkit-scrollbar {
     display: none;
