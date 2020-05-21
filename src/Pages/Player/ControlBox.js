@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../action";
 import styled from "styled-components";
+import axios from "axios";
+import { getLike, pushLike } from "../../Config";
 import { useCurrentTime, transTime, useSound } from "../../CustomHooks";
 
 const ControlBox = ({
@@ -19,6 +21,35 @@ const ControlBox = ({
   const [dragValue, setDragValue] = useState(false);
   const [isHover, setHover] = useState(false);
   const sound = useSound(audio);
+  const [따봉, set따봉] = useState(null);
+
+  const get따봉 = async () => {
+    const 따봉a = await axios.get(`${getLike}${metaData.id}`, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    });
+    set따봉(따봉a.data.like);
+  };
+
+  const 따봉누르기 = async (bol) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      await axios.post(
+        pushLike,
+        {
+          media_id: metaData.id,
+          like: bol ? "True" : "False",
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      get따봉();
+    }
+  };
 
   const dragLoad = (e) => {
     const fraction = e.x / window.innerWidth;
@@ -62,6 +93,12 @@ const ControlBox = ({
   const ended = () => {
     console.log("ended");
   };
+
+  useEffect(() => {
+    if (metaData && localStorage.getItem("token")) {
+      get따봉();
+    }
+  }, []);
 
   useEffect(() => {
     let intervalNum;
@@ -122,15 +159,44 @@ const ControlBox = ({
         {metaData && (
           <Titles>
             <Title>{metaData.title}</Title>
-            <SubTitle>
-              {metaData.artist} • 조회수 {metaData.view}회 • 좋아요{" "}
-              {metaData.like}개
-            </SubTitle>
+            <SubTitle>재생목록•YouTube Music•{metaData.artist}</SubTitle>
           </Titles>
         )}
         <MetaBoxBtn>
-          <i className="far fa-thumbs-down" />
-          <i className="far fa-thumbs-up" />
+          {따봉 === null ? (
+            <>
+              <i
+                className="far fa-thumbs-down"
+                onClick={() => 따봉누르기(false)}
+              />
+              <i
+                className="far fa-thumbs-up"
+                onClick={() => 따봉누르기(true)}
+              />
+            </>
+          ) : 따봉 ? (
+            <>
+              <i
+                className="far fa-thumbs-down"
+                onClick={() => 따봉누르기(false)}
+              />
+              <i
+                className="fas fa-thumbs-up"
+                onClick={() => 따봉누르기(true)}
+              />
+            </>
+          ) : (
+            <>
+              <i
+                className="fas fa-thumbs-down"
+                onClick={() => 따봉누르기(false)}
+              />
+              <i
+                className="far fa-thumbs-up"
+                onClick={() => 따봉누르기(true)}
+              />
+            </>
+          )}
           <i className="xi-ellipsis-v" />
         </MetaBoxBtn>
       </MetaBox>
@@ -252,6 +318,7 @@ const Thumbnail = styled.div`
 `;
 
 const Titles = styled.div`
+  min-width: 250px;
   height: 40px;
   padding: 0px 16px;
   font-size: 14px;

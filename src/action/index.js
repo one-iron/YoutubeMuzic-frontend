@@ -45,10 +45,11 @@ export const playerOff = () => {
   };
 };
 
-export const setPlayerSrc = (src, thumb, name, artist, view, like) => {
+export const setPlayerSrc = (id, src, thumb, name, artist, view, like) => {
   return {
     type: types.SETPLAYERSRC,
     payload: {
+      id,
       src,
       thumb,
       name,

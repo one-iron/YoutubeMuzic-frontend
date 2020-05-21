@@ -5,6 +5,14 @@ export const clientId =
 //진현님 API
 const JHurl = "http://10.58.0.33:8000";
 export const googleLogin = `${JHurl}/user/signin`;
+export const getLike = `${JHurl}/user/like?media_id=`;
+export const pushLike = `${JHurl}/user/like`;
+export const postRecentPlayList = `${JHurl}/user/recent/playlist`;
+
+//호준님 APU
+const HJurl = "http://10.58.3.243:8000";
+
+export const playListPageData = `${HJurl}/music/list/`;
 
 //글로벌 스타일
 export const GlobalStyle = createGlobalStyle`
@@ -54,6 +62,9 @@ table {
 	border-spacing: 0;
 }
 input {
+	all: unset;
+}
+a {
 	all: unset;
 }
 `;

@@ -1,8 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { getLike, pushLike } from "../../Config";
 import styled from "styled-components";
 
 const PlayListItem = ({ item, playerOn }) => {
   const [isHover, setHover] = useState(false);
+  const [따봉, set따봉] = useState(null);
+
+  const get따봉 = async () => {
+    const 따봉a = await axios.get(`${getLike}${item.item_id}`, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    });
+    set따봉(따봉a.data.like);
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      get따봉();
+    }
+  }, []);
+
+  const 따봉누르기 = async (bol) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      await axios.post(
+        pushLike,
+        {
+          media_id: item.item_id,
+          like: bol ? "True" : "False",
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      get따봉();
+    }
+  };
 
   return (
     <PlayListItemWrap
@@ -35,11 +72,39 @@ const PlayListItem = ({ item, playerOn }) => {
         </InfoWrap>
       </LeftSide>
       <RightSide>
-        <Icon style={{ display: isHover ? "" : "none" }}>
-          <i className="far fa-thumbs-down" />
-          <i className="far fa-thumbs-up" />
-          <i className="xi-ellipsis-v" />
-        </Icon>
+        {따봉 === null ? (
+          <Icon style={{ opacity: isHover ? 1 : 0 }}>
+            <i
+              className="far fa-thumbs-down"
+              onClick={() => 따봉누르기(false)}
+            />
+            <i className="far fa-thumbs-up" onClick={() => 따봉누르기(true)} />
+            <i className="xi-ellipsis-v" style={{ opacity: isHover ? 1 : 0 }} />
+          </Icon>
+        ) : 따봉 ? (
+          <Icon>
+            <i
+              className="far fa-thumbs-down"
+              style={{ opacity: isHover ? 1 : 0 }}
+              onClick={() => 따봉누르기(false)}
+            />
+            <i className="fas fa-thumbs-up" onClick={() => 따봉누르기(true)} />
+            <i className="xi-ellipsis-v" style={{ opacity: isHover ? 1 : 0 }} />
+          </Icon>
+        ) : (
+          <Icon>
+            <i
+              className="fas fa-thumbs-down"
+              onClick={() => 따봉누르기(false)}
+            />
+            <i
+              className="far fa-thumbs-up"
+              style={{ opacity: isHover ? 1 : 0 }}
+              onClick={() => 따봉누르기(true)}
+            />
+            <i className="xi-ellipsis-v" style={{ opacity: isHover ? 1 : 0 }} />
+          </Icon>
+        )}
         <Duration>{item.item_length}</Duration>
       </RightSide>
     </PlayListItemWrap>
@@ -125,6 +190,7 @@ const Icon = styled.div`
   padding: 0px 8px;
   i {
     margin-left: 24px;
+    cursor: pointer;
   }
 `;
 

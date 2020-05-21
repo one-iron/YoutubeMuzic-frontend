@@ -17,7 +17,10 @@ const Nav = ({
   imageUrl,
   history,
 }) => {
-  const menuItems = ["홈", "핫리스트"];
+  const menuItems = [
+    ["홈", "/"],
+    ["핫리스트", "/hotlist"],
+  ];
   const [token, setToken] = useState(null);
   const [isScrolled, setIsScrolled] = useState();
   const [userImg, setUserImg] = useState(false);
@@ -44,9 +47,10 @@ const Nav = ({
         url: googleLogin,
         data: {
           id: res.googleId,
-          token: res.tc.id_token,
+          token: res.tokenObj.id_token,
         },
       });
+      console.log(token);
       if (token.data.token) {
         const { email, familyName, givenName, imageUrl } = res.profileObj;
         localStorage.setItem("token", token.data.token);
@@ -102,9 +106,11 @@ const Nav = ({
           </InputWrap>
         )}
         {menuItems.map((item, idx) => (
-          <Item key={idx} isVisible={input.searchOn}>
-            {item}
-          </Item>
+          <Link key={`Nav_Key_${idx}`} to={item[1]}>
+            <Item key={idx} isVisible={input.searchOn}>
+              {item[0]}
+            </Item>
+          </Link>
         ))}
         <GoogleLogin
           clientId={clientId}
@@ -150,7 +156,7 @@ const Nav = ({
               </LoginBtn>
             )}
             onSuccess={(res) => LoginGoogle(res)}
-            onFailure={(res) => console.log("Google Error", res)}
+            onFailure={(res) => console.warn("Google Error", res)}
           />
         </Login>
       )}
