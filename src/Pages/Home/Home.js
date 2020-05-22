@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import MainThumbnail from "./MainThumbnail/MainThumbnail";
 import MainList from "./MainList/MainList";
-import { homeData } from "../../Config";
+import { API } from "../../Config";
 import styled from "styled-components";
 
 const Home = () => {
@@ -24,7 +24,7 @@ const Home = () => {
   useEffect(() => {
     if (boolean === true && count <= 3) {
       fetch(
-        `${homeData}?collection_id=${
+        `${API}/music/main?collection_id=${
           array[count === 1 ? 0 : 3]
         }&collection_id=${array[count == 1 ? 1 : 4]}&collection_id=${
           array[count === 1 ? 2 : 5]
@@ -41,7 +41,7 @@ const Home = () => {
   }, [boolean, count, datas, onScroll]);
 
   useEffect(() => {
-    fetch(`${homeData}`)
+    fetch(`${API}/music/main`)
       .then((res) => res.json())
       .then((res) => {
         setData(res.contents);

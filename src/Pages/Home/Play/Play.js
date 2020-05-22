@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PlayBtn from "../Images/PlayBtn";
 import * as actions from "../../../action";
+import { API } from "../../../Config";
 import styled from "styled-components";
 import { HJurl } from "../../../Config";
 import { JHurl } from "../../../Config";
@@ -12,11 +13,11 @@ const Play = ({ isHover, id, playerOn, setPlayerSongList, setAudioSrc }) => {
   const playMusic = (e, id) => {
     e.stopPropagation();
 
-    fetch(`${HJurl}/music/list/${id}`)
+    fetch(`${API}/music/list/${id}`)
       .then((data) => data.json())
       .then((data) => setList(data.elements));
 
-    fetch(`${JHurl}/user/recent/playlist`, {
+    fetch(`${API}/user/recent/playlist`, {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),
