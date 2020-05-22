@@ -11,7 +11,7 @@ export const postRecentPlayList = `${JHurl}/user/recent/playlist`;
 //호준님 APU
 const HJurl = "http://10.58.3.243:8000";
 export const playListPageData = `${HJurl}/music/list/`;
-export const homeData = `${HJurl}/music/main`;
+export const homeData = `${JHurl}/music/main`;
 //글로벌 스타일
 export const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,

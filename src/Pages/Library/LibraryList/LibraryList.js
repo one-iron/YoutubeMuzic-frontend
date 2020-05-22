@@ -43,6 +43,7 @@ const LibraryList = (props) => {
           {props.data.map((albumData, idx) => (
             <AlbumCard
               key={idx}
+              id={albumData.list_id}
               thumbnail={albumData.list_thumb}
               title={albumData.list_name}
               type={albumData.list_type}
