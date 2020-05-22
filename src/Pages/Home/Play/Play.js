@@ -2,27 +2,22 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PlayBtn from "../Images/PlayBtn";
 import * as actions from "../../../action";
+import { API } from "../../../Config";
 import styled from "styled-components";
+import { HJurl } from "../../../Config";
+import { JHurl } from "../../../Config";
 
-const Play = ({
-  isHover,
-  id,
-  playerOn,
-  playerOff,
-  setPlayerSongList,
-  setAudioSrc,
-}) => {
+const Play = ({ isHover, id, playerOn, setPlayerSongList, setAudioSrc }) => {
   const [list, setList] = useState();
-  const [meta, setMeta] = useState({});
 
   const playMusic = (e, id) => {
     e.stopPropagation();
 
-    fetch(`http://10.58.3.243:8000/music/list/${id}`)
+    fetch(`${API}/music/list/${id}`)
       .then((data) => data.json())
       .then((data) => setList(data.elements));
 
-    fetch("http://10.58.0.33:8000/user/recent/playlist", {
+    fetch(`${API}/user/recent/playlist`, {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -38,6 +33,7 @@ const Play = ({
     list && setPlayerSongList(list);
     list &&
       setAudioSrc(
+        list[0].itme_id,
         list[0].item_src,
         list[0].item_thumb,
         list[0].item_name,
@@ -62,9 +58,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     playerOn: () => {
       dispatch(actions.playerOn());
-    },
-    playerOff: () => {
-      dispatch(actions.playerOff());
     },
     setPlayerSongList: (list) => {
       dispatch(actions.getSongList(list));
@@ -103,5 +96,4 @@ const PlayBtnBox = styled.div`
     opacity: 100%;
     transition: all linear 0.1s;
   }
-  border: 1px solid red;
 `;

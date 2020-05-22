@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import LibraryList from "./LibraryList/LibraryList";
 import styled from "styled-components";
 import Locker from "../../Pages/Locker/Locker";
+import { API } from "../../Config";
 
 const Library = () => {
-  const API = "http://10.58.0.33:8000/user/recent/playlist";
   const [libraryData, setLibraryData] = useState();
 
   useEffect(() => {
-    fetch(API, {
+    fetch(`${API}/user/recent/playlist?${localStorage.getItem("token")}}`, {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("token"),
