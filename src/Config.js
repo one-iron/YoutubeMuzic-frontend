@@ -1,26 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 export const clientId =
   "563882109051-1vm6nvau748so36gdmpkjm028h2247as.apps.googleusercontent.com";
-<<<<<<< HEAD
-//진현님 API
-export const JHurl = "http://10.58.0.33:8000";
-
-export const googleLogin = `${JHurl}/user/signin`;
-export const getLike = `${JHurl}/user/like?media_id=`;
-export const pushLike = `${JHurl}/user/like`;
-export const postRecentPlayList = `${JHurl}/user/recent/playlist`;
-
-//호준님 APU
-export const HJurl = "http://10.58.1.153:8000";
-
-export const playListPageData = `${HJurl}/music/list/`;
-export const homeData = `${HJurl}/music/main`;
-
-=======
-
-// 하나로 변경된 API
 export const API = "http://13.209.85.9:8000";
-
 const URL = "http://13.209.85.9:8000";
 export const googleLogin = `${URL}/user/signin`;
 export const getLike = `${URL}/user/like?media_id=`;
@@ -28,7 +9,8 @@ export const pushLike = `${URL}/user/like`;
 export const postRecentPlayList = `${URL}/user/recent/playlist`;
 export const playListPageData = `${URL}/music/list/`;
 export const homeData = `${URL}/music/main`;
->>>>>>> 9e935be... api주소 변경 및 보관함 로직 수정
+export const getHotListData = `${URL}/music/hot`;
+
 //글로벌 스타일
 export const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,

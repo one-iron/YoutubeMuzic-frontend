@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { playListPageData } from "../Config";
+import axios from "axios";
 import styled from "styled-components";
 import Listbox from "./Listbox";
+import * as actions from "../action";
 
 class ArtistCard extends Component {
   constructor(props) {
@@ -11,6 +15,24 @@ class ArtistCard extends Component {
     };
   }
 
+  playAudio = async () => {
+    const id = Math.floor(Math.random() * (144 + 1 + 1) + 1);
+    const { playerOn, setPlayerSongList, setAudioSrc } = this.props;
+    const res = await axios(`${playListPageData}${id}`);
+    const list = res.data.elements;
+    playerOn();
+    setPlayerSongList(list);
+    setAudioSrc(
+      id,
+      "/data/sampleAudio.mp3",
+      this.props.thumb,
+      this.props.title,
+      this.props.artist,
+      "",
+      ""
+    );
+  };
+
   onClickJum = (e) => {
     e.stopPropagation();
     this.setState({
@@ -20,16 +42,17 @@ class ArtistCard extends Component {
 
   render() {
     return (
-      <Box_hotlist>
+      <BoxHotList>
         <HotListImg
+          onClick={this.playAudio}
           style={{ backgroundImage: 'url("' + this.props.thumb + '")' }}
         >
           <Jumjum onClick={this.onClickJum}>
             <i className="xi-ellipsis-v" />
           </Jumjum>
-          <Jum_bx jumBox={this.state.jum_box}>
+          <JumBox jumBox={this.state.jum_box}>
             <Listbox />
-          </Jum_bx>
+          </JumBox>
           <BButton />
         </HotListImg>
 
@@ -45,7 +68,7 @@ class ArtistCard extends Component {
           <span>•조회수</span>
           {this.props.views}
         </Nameandsinger>
-      </Box_hotlist>
+      </BoxHotList>
     );
   }
 }
@@ -56,12 +79,8 @@ const Song = styled.div`
   margin-bottom: 15px;
 `;
 
-const Title = styled.div`
-  display: flex;
-  align-items: flex-end;
-`;
-
 const Nameandsinger = styled.div`
+  font-size: 28px;
   position: absolute;
   font-weight: 350;
   margin-bottom: 20px;
@@ -69,7 +88,7 @@ const Nameandsinger = styled.div`
   top: 300px;
 `;
 
-const Box_hotlist = styled.div`
+const BoxHotList = styled.div`
   position: relative;
   color: white;
   font-weight: 100;
@@ -95,7 +114,6 @@ const HotListImg = styled.div`
   cursor: pointer;
 `;
 
-// 이것은 버튼
 const BButton = styled.div`
   position: relative;
   left: 50%;
@@ -126,7 +144,7 @@ const Jumjum = styled.div`
   }
 `;
 
-const Jum_bx = styled.div`
+const JumBox = styled.div`
   display: ${(props) => (props.jumBox ? "" : "none")};
   z-index: 3000 !important;
   position: absolute;
@@ -134,4 +152,18 @@ const Jum_bx = styled.div`
   bottom: -3%;
 `;
 
-export default ArtistCard;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    playerOn: () => {
+      dispatch(actions.playerOn());
+    },
+    setPlayerSongList: (list) => {
+      dispatch(actions.getSongList(list));
+    },
+    setAudioSrc: (src, thumb, name, artist, view, like) => {
+      dispatch(actions.setPlayerSrc(src, thumb, name, artist, view, like));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ArtistCard);

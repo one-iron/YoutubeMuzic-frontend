@@ -17,12 +17,20 @@ const Library = () => {
       .then((res) => res.json())
       .then((res) => setLibraryData(res.contents));
   }, []);
+
+  if (!libraryData) {
+    window.scrollTo({
+      top: 450,
+      left: 0,
+    });
+  }
+
   return (
     <LibraryWrap>
       <Title>{libraryData && libraryData.collection}</Title>
-      {libraryData && <LibraryList data={libraryData.elements} />}
+      {libraryData ? <LibraryList data={libraryData.elements} /> : <Mock />}
       <LibraryTab></LibraryTab>
-      <Locker />
+      <Locker libraryData={libraryData} />
     </LibraryWrap>
   );
 };
@@ -44,4 +52,8 @@ const Title = styled.div`
 `;
 const LibraryTab = styled.div`
   height: 51px;
+`;
+
+const Mock = styled.div`
+  height: 412px;
 `;

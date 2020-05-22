@@ -94,10 +94,20 @@ const ControlBox = ({
     console.log("ended");
   };
 
+  const keyPause = (e) => {
+    if (e.keyCode === 32) {
+      pressPlay();
+    }
+  };
+
   useEffect(() => {
+    document.addEventListener("keypress", keyPause);
+
     if (metaData && localStorage.getItem("token")) {
       get따봉();
     }
+
+    return () => document.removeEventListener("keypress", keyPause);
   }, []);
 
   useEffect(() => {

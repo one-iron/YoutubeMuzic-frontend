@@ -26,16 +26,12 @@ class First extends React.Component {
       });
   }
 
-  onClickJoin = () => {
-    this.props.history.push("/player");
-  };
-
   render() {
     console.log(this.state.data);
     const { contents } = this.state.data;
     return (
       <D_line>
-        <ArtistCardContainer onClick={this.onClickJoin}>
+        <ArtistCardContainer>
           {contents.map((content) => (
             <ArtistCard
               thumb={content.thumb}

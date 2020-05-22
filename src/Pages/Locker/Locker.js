@@ -5,38 +5,53 @@ import Second from "./Second";
 import Third from "./Third";
 import Fourth from "./Fourth";
 import Fifth_5 from "./Fifth_5";
+
 const tabs = ["재생목록", "앨범", "노래", "아티스트", "구독"];
 
-const obj = {
-  0: <First />,
-  1: <Second />,
-  2: <Third />,
-  3: <Fourth />,
-  4: <Fifth_5 />,
-};
-
 class Locker extends React.Component {
-  state = {
-    activeTabID: 0,
-  };
+  constructor(props) {
+    super(props);
 
-  clickHnadler = (id) => {
-    this.setState({
-      activeTabID: id,
-    });
-    {
+    this.state = {
+      activeTabID: 0,
+      obj: {
+        0: <First libraryData={this.props.libraryData} />,
+        1: <Second />,
+        2: <Third />,
+        3: <Fourth />,
+        4: <Fifth_5 />,
+      },
+    };
+  }
+  componentDidMount() {
+    if (!this.props.libraryData) {
       window.scrollTo({
         top: 450,
         left: 0,
-        behavior: "smooth",
       });
     }
+  }
+
+  clickHnadler = (id) => {
+    this.setState(
+      {
+        activeTabID: id,
+      },
+      () => {
+        if (!this.props.libraryData) {
+          window.scrollTo({
+            top: 450,
+            left: 0,
+          });
+        }
+      }
+    );
   };
 
   render() {
     console.log(this.state);
-    const { activeTabID } = this.state;
-    //구조할당
+    const { activeTabID, obj } = this.state;
+
     return (
       <Wrapper_a>
         <Wrapper>
@@ -52,14 +67,6 @@ class Locker extends React.Component {
                 </span>
               );
             })}
-            {/* <li onClick={() => this.clickHnadler(0)}>{tabs[0]}</li>
-
-          <li onClick={() => this.clickHnadler(1)}>{tabs[1]}</li>
-
-          <li onClick={() => this.clickHnadler(2)}>{tabs[2]}</li>
-
-          <li onClick={() => this.clickHnadler(3)}>{tabs[3]}</li>
-        </ul> */}
           </ul>
           <Content_box>{obj[activeTabID]}</Content_box>
         </Wrapper>
