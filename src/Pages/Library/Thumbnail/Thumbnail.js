@@ -42,7 +42,7 @@ const ThumbnailWrap = styled.div`
     background: linear-gradient(
         to bottom,
         rgba(20, 20, 20, 0.4) 10%,
-        rgba(20, 20, 20, 0.3) 25%,
+        rgba(20, 20, 20, 0.2) 25%,
         rgba(20, 20, 20, 0.1) 50%,
         rgba(20, 20, 20, 0) 80%,
         rgba(20, 20, 20, 0) 100%
@@ -53,6 +53,7 @@ const ThumbnailWrap = styled.div`
     border-radius: 5px;
     background-size: cover;
     transition-timing-function: linear;
+    cursor: pointer;
   }
 `;
 
