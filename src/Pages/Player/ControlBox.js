@@ -35,7 +35,7 @@ const ControlBox = ({
   const 따봉누르기 = async (bol) => {
     const token = localStorage.getItem("token");
     if (token) {
-      await axios.post(
+      const res = await axios.post(
         pushLike,
         {
           media_id: metaData.id,
@@ -47,7 +47,7 @@ const ControlBox = ({
           },
         }
       );
-      get따봉();
+      set따봉(res.data.like);
     }
   };
 

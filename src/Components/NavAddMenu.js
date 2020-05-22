@@ -1,35 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../action";
 import styled from "styled-components";
 
-const NavAddMenu = ({
-  imageUrl,
-  data,
-  isClickedUser,
-  history,
-  handleLoginData,
-  setToken,
-}) => {
+const NavAddMenu = ({ isClickedUser, history, handleLoginData, setToken }) => {
+  const [info, setInfo] = useState([]);
+
   const LogOutGoogle = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("ImageUrl");
+    localStorage.removeItem("userInfo");
     history.push("/");
     handleLoginData("", "", "", "");
     setToken(null);
   };
 
+  useEffect(() => {
+    setInfo([
+      localStorage.getItem("imageUrl"),
+      localStorage.getItem("familyName"),
+      localStorage.getItem("givenName"),
+      localStorage.getItem("email"),
+    ]);
+  }, []);
+
   return (
     <NavAddMenuWrap isClickedUser={isClickedUser}>
       <ProfileWrap>
-        <ProfileImage imageUrl={imageUrl} />
+        <ProfileImage imageUrl={info[0]} />
         <ProfileInfo>
           <p>
-            {data.familyName}
-            {data.givenName}
+            {info[1]}
+            {info[2]}
           </p>
-          {data.email}
+          {info[3]}
           <LogOutBtn onClick={() => LogOutGoogle()}>
             Google계정 로그아웃
           </LogOutBtn>

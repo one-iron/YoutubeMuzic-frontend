@@ -25,11 +25,11 @@ const PlayListItem = ({ item, playerOn }) => {
   const 따봉누르기 = async (bol) => {
     const token = localStorage.getItem("token");
     if (token) {
-      await axios.post(
+      const res = await axios.post(
         pushLike,
         {
           media_id: item.item_id,
-          like: bol ? "True" : "False",
+          like: bol,
         },
         {
           headers: {
@@ -37,7 +37,7 @@ const PlayListItem = ({ item, playerOn }) => {
           },
         }
       );
-      get따봉();
+      set따봉(res.data.like);
     }
   };
 
@@ -114,7 +114,7 @@ const PlayListItem = ({ item, playerOn }) => {
 export default PlayListItem;
 
 const PlayListItemWrap = styled.div`
-  height: 70px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -172,7 +172,6 @@ const InfoWrap = styled.div`
     width: 40%;
     font-size: 15px;
     color: #ffffff;
-    margin: 0px 12px 8px 0px;
   }
   span {
     width: 30%;
