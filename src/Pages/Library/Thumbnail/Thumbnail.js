@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import Menu from "../Menu/Menu";
 import Play from "../Play/Play";
 import styled from "styled-components";
@@ -7,11 +8,16 @@ const Thumbnail = (props) => {
   const [Hover, SetHover] = useState(false);
   const [MenuClick, setMenuClick] = useState(false);
 
+  const goToAlbum = (id) => {
+    props.history.push(`/playlist/${id}`);
+  };
+
   return (
     <ThumbnailWrap
       onMouseEnter={() => SetHover(true)}
       onMouseLeave={() => SetHover(false)}
       thumbnail={props.thumbnail}
+      onClick={() => goToAlbum(props.id)}
     >
       <Menu isHover={Hover} MenuClick={MenuClick} setMenuClick={setMenuClick}>
         <MenuModal MenuClick={MenuClick}></MenuModal>
@@ -20,7 +26,7 @@ const Thumbnail = (props) => {
     </ThumbnailWrap>
   );
 };
-export default Thumbnail;
+export default withRouter(Thumbnail);
 
 const ThumbnailWrap = styled.div`
   display: flex;

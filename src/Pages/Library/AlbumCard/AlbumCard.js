@@ -6,7 +6,7 @@ const AlbumCard = (props) => {
 
   return (
     <AlbumCardWrap>
-      <Thumbnail thumbnail={thumbnail} />
+      <Thumbnail thumbnail={thumbnail} id={props.id} />
       <Text>
         <Title> {title}</Title>
         <SubTitle>
