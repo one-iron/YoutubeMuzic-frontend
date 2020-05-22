@@ -2,16 +2,19 @@ import { createGlobalStyle } from "styled-components";
 export const clientId =
   "563882109051-1vm6nvau748so36gdmpkjm028h2247as.apps.googleusercontent.com";
 //진현님 API
-const JHurl = "http://10.58.0.33:8000";
+export const JHurl = "http://10.58.0.33:8000";
+
 export const googleLogin = `${JHurl}/user/signin`;
 export const getLike = `${JHurl}/user/like?media_id=`;
 export const pushLike = `${JHurl}/user/like`;
 export const postRecentPlayList = `${JHurl}/user/recent/playlist`;
 
 //호준님 APU
-const HJurl = "http://10.58.3.243:8000";
+export const HJurl = "http://10.58.1.153:8000";
+
 export const playListPageData = `${HJurl}/music/list/`;
-export const homeData = `${JHurl}/music/main`;
+export const homeData = `${HJurl}/music/main`;
+
 //글로벌 스타일
 export const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
