@@ -59,4 +59,6 @@ YouTube에서 개발한 음악 스트리밍 서비스 YoutubeMusic 웹에서 다
 
 ## 데모 영상
 
+<a href="https://youtu.be/5c2VEhlTCJc">
 <img src="./src/img/youtubeMusic.png">
+</a>
