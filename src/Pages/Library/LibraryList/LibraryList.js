@@ -3,7 +3,7 @@ import AlbumCard from "../AlbumCard/AlbumCard";
 import styled from "styled-components";
 
 const LibraryList = (props) => {
-  let scrollbar = null;
+  let scrollbar = "";
   const [scrollPoint, setScroll] = useState();
   const [screenWidth, setWidth] = useState(window.screen.width);
 

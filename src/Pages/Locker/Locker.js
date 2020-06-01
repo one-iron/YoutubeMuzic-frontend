@@ -38,10 +38,11 @@ class Locker extends React.Component {
         activeTabID: id,
       },
       () => {
-        if (!this.props.libraryData) {
+        if (this.props.libraryData) {
           window.scrollTo({
             top: 450,
             left: 0,
+            behavior: "smooth",
           });
         }
       }
@@ -83,16 +84,6 @@ const Wrapper = styled.div`
   border: 2px solid hidden;
   margin: 10px 10px;
 
-  /* display: flex;
-  cursor: pointer; */
-
-  /* .Lio {
-    
-    
-    padding: 8px 10px;
-    border-bottom: 1px solid darkgray;
-    margin-bottom: 30px;
-  } */
   .selected {
     cursor: pointer;
     border-bottom-color: white;
@@ -112,14 +103,10 @@ const Content_box = styled.div`
   color: white;
   font-size: 70px;
   margin: 80px 10px;
-  width: 1300px;
+  width: 100vw;
+  padding-right: 300px;
 `;
 
-// const Lio = styled.div`
-//   border-color: pink;
-//   display: flex;
-//   flex-direction: row;
-// `;
 const Wrapper_a = styled.div`
   font-size: 17px;
   margin-left: 90px;

@@ -1,22 +1,57 @@
 import React from "react";
 import styled from "styled-components";
-import blacklist from "../../img/blacklist.png";
+import axios from "axios";
+import { getLikedSong } from "../../Config";
+import PlayListItem from "../../Pages/PlayList/PlayListItem";
 
 class Third extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      list: false,
+    };
+  }
+
+  componentDidMount() {
+    const token = localStorage.getItem("token");
+
+    const getData = async () => {
+      if (token) {
+        const res = await axios.get(getLikedSong, {
+          headers: { Authorization: token },
+        });
+        this.setState({
+          list: res.data.contents,
+        });
+      }
+    };
+
+    getData();
+  }
+
   render() {
     return (
       <div>
-        <Middle_box>
-          <img className="img" src={blacklist} />
-        </Middle_box>
+        <Wrap>
+          {this.state.list &&
+            this.state.list.map((item) => (
+              <PlayListItem
+                key={item.item_id}
+                item={item}
+                playerOn={"() => playerOnInListPage(item)"}
+                playerOff={"playerOff"}
+              />
+            ))}
+        </Wrap>
       </div>
     );
   }
 }
 export default Third;
 
-const Middle_box = styled.div`
+const Wrap = styled.div`
   display: flex;
-  width: 50%;
+  flex-direction: column;
+  width: 100%;
   margin-bottom: 2000px;
 `;

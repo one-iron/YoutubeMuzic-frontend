@@ -24,6 +24,9 @@ const ControlBox = ({
   const [따봉, set따봉] = useState(null);
 
   const get따봉 = async () => {
+    if (!metaData) {
+      return;
+    }
     const 따봉a = await axios.get(`${getLike}${metaData.id}`, {
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -39,7 +42,7 @@ const ControlBox = ({
         pushLike,
         {
           media_id: metaData.id,
-          like: bol ? "True" : "False",
+          like: bol,
         },
         {
           headers: {
@@ -99,6 +102,10 @@ const ControlBox = ({
       pressPlay();
     }
   };
+
+  useEffect(() => {
+    get따봉();
+  }, [metaData]);
 
   useEffect(() => {
     document.addEventListener("keypress", keyPause);
